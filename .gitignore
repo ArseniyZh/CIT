@@ -1,2 +1,5 @@
-.pyc
+*.pyc
+*.exe
+*.o
 .idea
+.pytest_cache
