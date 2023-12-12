@@ -3,3 +3,5 @@
 *.o
 .idea
 .pytest_cache
+.docx
+.pdf
