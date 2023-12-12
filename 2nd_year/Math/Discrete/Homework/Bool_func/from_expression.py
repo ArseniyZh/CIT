@@ -30,7 +30,7 @@ def generate_truth_table(expression: str) -> Tuple[SymbolsListType, TruthTableTy
     :param expression: Строка с булевой функцией
     :return: Кортеж из списка символов и таблцы истинности
     """
-    symbols_list = list(set(expression) & set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
+    symbols_list = list(set(expression) & set("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
     _symbols = symbols(symbols_list)
     tt = list(truth_table(expression, _symbols))
     return _symbols, tt
@@ -75,3 +75,7 @@ def expression_main():
 
     print(f"СКНФ: {cnf}")
     print(f"СДНФ: {dnf}")
+
+
+if __name__ == "__main__":
+    expression_main()
