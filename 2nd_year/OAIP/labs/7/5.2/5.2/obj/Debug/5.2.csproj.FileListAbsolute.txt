@@ -1,0 +1,10 @@
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\bin\Debug\5.2.exe.config
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\bin\Debug\5.2.exe
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\bin\Debug\5.2.pdb
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\5.2.csproj.AssemblyReference.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\_5._2.Form1.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\_5._2.Properties.Resources.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\5.2.csproj.GenerateResource.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\5.2.csproj.CoreCompileInputs.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\5.2.exe
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\7\5.2\5.2\obj\Debug\5.2.pdb

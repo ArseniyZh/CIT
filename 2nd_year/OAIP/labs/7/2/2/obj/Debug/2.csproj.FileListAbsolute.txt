@@ -1,0 +1,10 @@
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\2.csproj.AssemblyReference.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\_2.Form1.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\_2.Properties.Resources.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\2.csproj.GenerateResource.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\2.csproj.CoreCompileInputs.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\bin\Debug\2.exe.config
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\bin\Debug\2.exe
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\bin\Debug\2.pdb
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\2.exe
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\rpm\labs\1\2\2\obj\Debug\2.pdb

@@ -5,6 +5,7 @@
 using namespace std;
 
 double generateRandomNumber() {
+    int** mas = new mas[int, int];
     return (rand() % 21) - 10;
 }
 
@@ -29,7 +30,7 @@ void printMatrix(double** matrix, int rows, int cols) {
 
 int main() {
     srand(static_cast<unsigned>(time(0)));
-
+    int** mas = new mas[int, int];
     int rows, cols;
 
     cout << "Enter the number of rows: ";
