@@ -1,0 +1,42 @@
+﻿<Window x:Class="YourNamespace.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WPF Application" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Change Background Color">
+                    <MenuItem Header="Blue" Click="ChangeBackgroundColor_Click"/>
+                    <MenuItem Header="Green" Click="ChangeBackgroundColor_Click"/>
+                    <MenuItem Header="Yellow" Click="ChangeBackgroundColor_Click"/>
+                    <MenuItem Header="Red" Click="ChangeBackgroundColor_Click"/>
+                    <MenuItem Header="White" Click="ChangeBackgroundColor_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        <ToolBar DockPanel.Dock="Top">
+            <Button Content="Exit" ToolTip="Exit Application" Click="Exit_Click"/>
+            <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Change Color:"/>
+            <ComboBox  ToolTip="Change Background Color" SelectionChanged="ChangeBackgroundColor_ComboBoxChanged">
+                <ComboBoxItem Content="Blue"/>
+                <ComboBoxItem Content="Green"/>
+                <ComboBoxItem Content="Yellow"/>
+                <ComboBoxItem Content="Red"/>
+                <ComboBoxItem Content="White"/>
+            </ComboBox>
+            <Button Content="About" ToolTip="About Developer" Click="About_Click"/>
+        </ToolBar>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Name="statusText" Text="Ready"/>
+        </StatusBar>
+        <Grid>
+            <!-- Main content goes here -->
+        </Grid>
+    </DockPanel>
+</Window>

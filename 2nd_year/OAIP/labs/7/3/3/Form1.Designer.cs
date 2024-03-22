@@ -32,6 +32,7 @@
             label1 = new Label();
             button1 = new Button();
             label2 = new Label();
+            label3 = new Label();
             SuspendLayout();
             // 
             // textBox1
@@ -70,11 +71,22 @@
             label2.Text = "Результат";
             label2.Click += label2_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(257, 54);
+            label3.Name = "label3";
+            label3.Size = new Size(290, 40);
+            label3.TabIndex = 4;
+            label3.Text = "Введите значение X, чтобы найти сумму\r\n(x - 1)...(x - 128)/(x - 2)...(x - 127)";
+            label3.Click += label3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(button1);
             Controls.Add(label1);
@@ -91,5 +103,6 @@
         private Label label1;
         private Button button1;
         private Label label2;
+        private Label label3;
     }
 }

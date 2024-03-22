@@ -38,13 +38,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(253, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(283, 16);
+            this.label1.Size = new System.Drawing.Size(290, 32);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Введите элементы массива через пробел";
+            this.label1.Text = "Введите элементы массива через пробел\r\nМинимальный элемент будет умножен на 2\r\n";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(256, 41);
+            this.textBox1.Location = new System.Drawing.Point(256, 53);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(280, 22);
             this.textBox1.TabIndex = 1;
@@ -52,7 +52,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(344, 69);
+            this.button1.Location = new System.Drawing.Point(344, 81);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(118, 23);
             this.button1.TabIndex = 2;

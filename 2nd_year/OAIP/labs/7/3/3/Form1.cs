@@ -16,16 +16,31 @@ namespace _3
         {
             if (int.TryParse(textBox1.Text, out int x))
             {
-                float result = 1;
-
-                for (int i = 2; i <= 128; i++)
+                if (x >= 130)
                 {
-                    result *= (x - i) / (x - i - 1);
-                }
+                    float result = 1;
 
-                label2.Text = $"Результат: {result}";
-                
+                    for (int i = 2; i <= 128; i++)
+                    {
+                        result *= (x - i) / (x - i - 1);
+                    }
+
+                    label2.Text = $"Результат: {result}";
+                }
+                else
+                {
+                    MessageBox.Show("Значение x не может быть меньше 130.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+            else
+            {
+                MessageBox.Show("Введите корректные значения для переменной x.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

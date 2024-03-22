@@ -123,9 +123,11 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(275, 142);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 16);
+            this.label5.Size = new System.Drawing.Size(291, 48);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Результат";
+            this.label5.Text = "Общее сопротивление в цепи\r\nПадение напряжения на первом резисторе\r\nПадение напря" +
+    "жения на втором резисторе";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // Form1
             // 

@@ -68,5 +68,10 @@ namespace _5
             // Вычисляем падение напряжения на втором резисторе
             voltageDrop2 = current * resistance2;
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

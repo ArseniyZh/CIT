@@ -27,12 +27,19 @@ namespace _5._3
         {
             if (int.TryParse(textBox1.Text, out int rows) && int.TryParse(textBox2.Text, out int columns))
             {
-                // Создаем новую матрицу с заданными размерами
-                matrix = GenerateRandomMatrix(rows, columns);
+                if (rows > 0 && columns > 0)
+                {
+                    // Создаем новую матрицу с заданными размерами
+                    matrix = GenerateRandomMatrix(rows, columns);
 
-                // Выводим матрицу в TextBox
-                DisplayMatrix(matrix, dataGridView2);
-                DisplayMatrix(RotateMatrix(matrix), dataGridView1);
+                    // Выводим матрицу в TextBox
+                    DisplayMatrix(matrix, dataGridView2);
+                    DisplayMatrix(RotateMatrix(matrix), dataGridView1);
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректные значения для размерности матрицы.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {

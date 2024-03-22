@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Умножение матриц</title>
+</head>
+<body>
+    <h2>Проверка возможности умножения матриц</h2>
+    <div>
+        <label for="m">Введите размер m:</label>
+        <input type="number" id="m">
+        <label for="n">Введите размер n:</label>
+        <input type="number" id="n">
+    </div>
+    <div>
+        <label for="matrixM">Введите элементы первой матрицы (через пробел):</label>
+        <input type="text" id="matrixM">
+        <label for="matrixN">Введите элементы второй матрицы (через пробел):</label>
+        <input type="text" id="matrixN">
+    </div>
+    <button onclick="multiplyMatrices()">Умножить матрицы</button>
+    <div id="result"></div>
+
+    <script src="matrix.js"></script>
+</body>
+</html>

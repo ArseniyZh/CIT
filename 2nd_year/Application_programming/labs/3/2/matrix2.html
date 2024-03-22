@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Операции с матрицей 2x2 и Вектором</title>
+    <style>
+        .matrix-input, .vector-input {
+            width: 50px;
+            margin: 5px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Матрица 2x2 и Вектор</h2>
+    <div class="form-group">
+        <label>Матрица A:</label><br>
+        <input type="number" id="a11" class="matrix-input" placeholder="a11"> 
+        <input type="number" id="a12" class="matrix-input" placeholder="a12"><br>
+        <input type="number" id="a21" class="matrix-input" placeholder="a21"> 
+        <input type="number" id="a22" class="matrix-input" placeholder="a22">
+    </div>
+    <div class="form-group">
+        <label>Матрица B:</label><br>
+        <input type="number" id="b11" class="matrix-input" placeholder="b11"> 
+        <input type="number" id="b12" class="matrix-input" placeholder="b12"><br>
+        <input type="number" id="b21" class="matrix-input" placeholder="b21"> 
+        <input type="number" id="b22" class="matrix-input" placeholder="b22">
+    </div>
+    <div class="form-group">
+        <label>Вектор V:</label><br>
+        <input type="number" id="v1" class="vector-input" placeholder="v1">
+        <input type="number" id="v2" class="vector-input" placeholder="v2">
+    </div>
+    <div class="form-group">
+        <button onclick="performOperation('add')">Сложить A и B</button>
+        <button onclick="performOperation('sub')">Вычесть B из A</button>
+        <button onclick="performOperation('mult')">Умножить A на B</button>
+        <button onclick="performOperation('det')">Определитель A</button>
+        <button onclick="performOperation('transpon')">Транспонировать A</button>
+        <button onclick="performOperation('inverse')">Обратная матрица A</button>
+        <button onclick="performOperation('multVector')">Умножить A на Вектор V</button>
+    </div>
+    <div id="result"></div>
+
+    <script src="matrix2.js"></script>
+</body>
+</html>
