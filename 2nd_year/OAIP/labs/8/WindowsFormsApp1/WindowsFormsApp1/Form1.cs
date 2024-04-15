@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -65,6 +66,13 @@ namespace WindowsFormsApp1
             return;
         }
 
+        private void addFigureToList(Figure figure, string figureName)
+        {
+            ShapeContainer.figureList.Add(figure);
+            int count = ShapeContainer.figureList.Count;
+            comboBox1.Items.Add($"({count}) {figureName}"); ; ;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // Прямоугольник
@@ -92,8 +100,7 @@ namespace WindowsFormsApp1
             }
 
             Rectangle rectangle = new Rectangle(startX, startY, a, b);
-            ShapeContainer.figureList.Add(rectangle);
-            comboBox1.Items.Add($"Прямоугольник ({a}; {b})"); ; ;
+            addFigureToList(rectangle, $"Прямоугольник ({a}; {b})");
             rectangle.Draw();
         }
 
@@ -127,52 +134,9 @@ namespace WindowsFormsApp1
             }
 
             Square square = new Square(startX, startY, a);
-            ShapeContainer.figureList.Add(square);
-            comboBox1.Items.Add($"Квадрат ({a})");
+            addFigureToList(square, $"Квадрат ({a})");
             square.Draw();
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            // Многоугольник
-
-            bool checkError = checkStartCoordinates();
-            if (!checkError) { return; }
-
-            int.TryParse(textBox7.Text, out int a);
-            int.TryParse(textBox5.Text, out int b);
-
-            if (a < 0 || b < 0)
-            {
-                MessageBox.Show("Введите значения больше 0");
-                return;
-            }
-
-
-            if (a > pictureBox1.ClientSize.Width || a > pictureBox1.ClientSize.Height)
-            {
-                MessageBox.Show($"Введите корректное значение высоты");
-                textBox7.Text = "";
-                textBox7.Focus();
-                return;
-            }
-            if (startX + a >= pictureBox1.ClientSize.Width)
-            {
-                raiseIncorrectStartX();
-                return;
-            }
-            if (startY + a >= pictureBox1.ClientSize.Height)
-            {
-                raiseIncorrectStartY();
-                return;
-            }
-
-            Polygon polygon = new Polygon(startX, startY, a, b);
-            ShapeContainer.figureList.Add(polygon);
-            comboBox1.Items.Add($"Многоугольник ({a}; {b})");
-            polygon.Draw();
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             // Треугольник
@@ -207,8 +171,7 @@ namespace WindowsFormsApp1
             }
 
             Triangle triangle = new Triangle(startX, startY, a);
-            ShapeContainer.figureList.Add(triangle);
-            comboBox1.Items.Add($"Треугольник ({a})");
+            addFigureToList(triangle, $"Треугольник ({a})");
             triangle.Draw();
         }
 
@@ -240,8 +203,7 @@ namespace WindowsFormsApp1
             }
 
             Ellipse ellipse = new Ellipse(startX, startY, a, b);
-            ShapeContainer.figureList.Add(ellipse);
-            comboBox1.Items.Add($"Элипс ({a}; {b})");
+            addFigureToList(ellipse, $"Элипс ({a}; {b})");
             ellipse.Draw();
         }
 
@@ -272,8 +234,7 @@ namespace WindowsFormsApp1
             }
 
             Circle circle = new Circle(startX, startY, a);
-            ShapeContainer.figureList.Add(circle);
-            comboBox1.Items.Add($"Круг ({a})");
+            addFigureToList(circle, $"Круг ({a})");
             circle.Draw();
         }
 
@@ -305,8 +266,7 @@ namespace WindowsFormsApp1
             }
 
             House house = new House(startX, startY, a, b);
-            ShapeContainer.figureList.Add(house);
-            comboBox1.Items.Add($"Дом ({a}; {b})");
+            addFigureToList(house, $"Дом ({a}; {b})");
             house.Draw();
         }
 
@@ -326,15 +286,31 @@ namespace WindowsFormsApp1
             {
                 int.TryParse(textBox12.Text, out int newX);
                 int.TryParse(textBox13.Text, out int newY);
-
-                if (newX <= 0 || newY <= 0)
-                {
-                    MessageBox.Show("Введите корректные значения новых координат");
-                    return;
-                }
                 
                 ShapeContainer.figureList[comboBox1.SelectedIndex].MoveTo(newX, newY, comboBox1.SelectedIndex);
                 return;
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Многоугольник
+
+            using (Form2 formPoints = new Form2())
+            {
+                if (formPoints.ShowDialog() == DialogResult.OK)
+                {
+                    List<Point> points = formPoints.Points;
+                    if (points.Count < 3)
+                    {
+                        MessageBox.Show("Многоугольник должен состоять как минимум из трех точек");
+                        return;
+                    }
+
+                    _Polygon polygon = new _Polygon(points);
+                    addFigureToList(polygon, $"Многоугольник ({points.Count} точек)");
+                    polygon.Draw();
+                }
             }
         }
 

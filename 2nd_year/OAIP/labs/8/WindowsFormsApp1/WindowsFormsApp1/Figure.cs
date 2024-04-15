@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -11,14 +12,13 @@ namespace WindowsFormsApp1
     {
         public int x, y, w, h;
 
-        public static void DeleteF(Figure figure, bool flag = true, int ind = 0)
+        public static void DeleteF(Figure figure, bool flag = true, int ind = 0, bool add = true)
         {
-            if (flag == true)
+            Graphics g = Graphics.FromImage(Init.bitmap);
+            if (flag)
             {
-                Graphics g = Graphics.FromImage(Init.bitmap);
                 ShapeContainer.figureList.Remove(figure);
                 g.Clear(Color.White);
-                Init.pictureBox.Image = Init.bitmap;
                 foreach (Figure f in ShapeContainer.figureList)
                 {
                     f.Draw();
@@ -26,19 +26,18 @@ namespace WindowsFormsApp1
             }
             else
             {
-                Graphics g = Graphics.FromImage(Init.bitmap);
-                ShapeContainer.figureList.Remove(figure);
+                // При обновлении позиции просто перерисовываем всё изображение
                 g.Clear(Color.White);
-                Init.pictureBox.Image = Init.bitmap;
                 foreach (Figure f in ShapeContainer.figureList)
                 {
                     f.Draw();
                 }
-                ShapeContainer.figureList.Insert(ind, figure);
             }
+            Init.pictureBox.Image = Init.bitmap;
         }
 
-        public virtual void MoveTo(int x, int y, int ind)
+
+        public virtual void MoveTo(int x, int y, int ind, bool add = true)
         {
             if (!((this.x + x < 0 && this.y + y < 0) || (this.y + y < 0) || (this.x + x > Init.pictureBox.Width && this.y + y < 0) ||
                 (this.x + w + x > Init.pictureBox.Width) || (this.x + x > Init.pictureBox.Width && this.y + y > Init.pictureBox.Height) ||
@@ -46,8 +45,12 @@ namespace WindowsFormsApp1
             {
                 this.x += x;
                 this.y += y;
-                DeleteF(this, false, ind);
+                DeleteF(this, false, ind, add);
                 Draw();
+            }
+            else
+            {
+                MessageBox.Show("Вышли за экран");
             }
         }
 
@@ -133,11 +136,47 @@ namespace WindowsFormsApp1
             for (int i = 0; i < n; i++)
             {
                 double z = 2 * Math.PI / n * i + startAngle * (Math.PI / 180); // Переводим градусы в радианы
-                p[i].X = (int)(x + w / 2 + Math.Round(Math.Cos(z) * w / 2));
-                p[i].Y = (int)(y + h / 2 - Math.Round(Math.Sin(z) * h / 2));
+                p[i].X = (int)(x + Math.Round(Math.Cos(z) * w / 2));
+                p[i].Y = (int)(y - Math.Round(Math.Sin(z) * h / 2));
             }
             g.DrawPolygon(Init.pen, p);
             Init.pictureBox.Image = Init.bitmap;
+        }
+    }
+
+    internal class _Polygon : Figure
+    {
+        List<Point> points;
+
+        public _Polygon(List<Point> points)
+        {
+            this.points = new List<Point>(points);
+        }
+
+        public override void Draw()
+        {
+            if (points.Count < 3)
+            {
+                throw new InvalidOperationException("A polygon must have at least three points.");
+            }
+
+            Graphics g = Graphics.FromImage(Init.bitmap);
+            g.DrawPolygon(Init.pen, points.ToArray());
+            Init.pictureBox.Image = Init.bitmap;
+        }
+
+        public override void MoveTo(int newX, int newY, int ind, bool add = false)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                points[i] = new Point(points[i].X + newX, points[i].Y + newY);
+            }
+
+            this.x += newX;
+            this.y += newY;
+
+            DeleteF(this, false, ind, add);
+            Draw();
         }
     }
 
@@ -150,7 +189,7 @@ namespace WindowsFormsApp1
     internal class House : Figure
     {
         Rectangle baseHouse;
-        Polygon roof;
+        _Polygon roof;
         Circle window;
 
         public House(int x, int y, int w, int h)
@@ -160,8 +199,14 @@ namespace WindowsFormsApp1
             this.w = w;
             this.h = h;
 
-            baseHouse = new Rectangle(x, y + h / 3, w, h * 2 / 3);
-            roof = new Polygon(x, y - h * 2 / 5, w, 3);
+            baseHouse = new Rectangle(x, y, w, h);
+            List<Point> roofPoints = new List<Point>
+        {
+            new Point(x, y), // Левая нижняя точка крыши
+            new Point(x + w, y), // Правая нижняя точка крыши
+            new Point(x + w / 2, y - h / 3) // Верхняя точка крыши
+        };
+            roof = new _Polygon(roofPoints);
             window = new Circle(x + w / 2 - w / 10, y + h / 2, w / 5);
         }
 
@@ -171,5 +216,21 @@ namespace WindowsFormsApp1
             roof.Draw();
             window.Draw();
         }
+
+        public override void MoveTo(int x, int y, int ind, bool add = true)
+        {
+            int deltaX = x - this.x;
+            int deltaY = y - this.y;
+
+            this.x += deltaX;
+            this.y += deltaY;
+
+            baseHouse.MoveTo(x, y, ind, false);
+            roof.MoveTo(x, y, ind, false);
+            window.MoveTo(x, y, ind, false);
+
+            Draw();
+        }
+
     }
 }

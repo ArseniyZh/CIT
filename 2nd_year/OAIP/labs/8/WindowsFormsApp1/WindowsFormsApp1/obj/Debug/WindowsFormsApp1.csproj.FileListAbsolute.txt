@@ -8,3 +8,4 @@ C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\
 C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\8\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\8\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\8\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\8\WindowsFormsApp1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form2.resources
