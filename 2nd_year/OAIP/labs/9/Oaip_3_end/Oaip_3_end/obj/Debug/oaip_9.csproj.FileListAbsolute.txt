@@ -8,3 +8,13 @@ C:\Users\Арсений\Desktop\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.csproj.Ge
 C:\Users\Арсений\Desktop\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.csproj.CoreCompileInputs.cache
 C:\Users\Арсений\Desktop\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.exe
 C:\Users\Арсений\Desktop\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.pdb
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\bin\Debug\oaip_9.exe.config
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\bin\Debug\oaip_9.exe
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\bin\Debug\oaip_9.pdb
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.csproj.AssemblyReference.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.Form1.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.Properties.Resources.resources
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.csproj.GenerateResource.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.csproj.CoreCompileInputs.cache
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.exe
+C:\Users\Арсений\Desktop\КИТ\репозиторий\CIT\2nd_year\OAIP\labs\9\Oaip_3_end\Oaip_3_end\obj\Debug\oaip_9.pdb

@@ -33,7 +33,6 @@ namespace oaip_9
                     richTextBox1.Text += textBoxInputString.Text + " - не выполнено\n";
                 }
                 textBoxInputString.Text = "";
-
             }
         }
     }

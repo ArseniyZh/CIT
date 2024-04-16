@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -45,126 +46,122 @@ namespace oaip_9
                 {
                     temporary_storage += c;
                 }
-                
-
-
             }
             operandsStack.Push(temporary_storage);
 
-            
+
+            bool result = false;
             if (IsOperator(operandsStack.Peek()))
             {
-                return ApplyOperation(operandsStack, operandsStack.Pop());
+                try
+                {
+                    result = ApplyOperation(operandsStack, operandsStack.Pop());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
             }
-            return false;
+
+            operandsStack.Clear();
+            return result;
         }
 
+        private static House getHouseByName(string name)
+        {
+            foreach (House house in ShapeContainer.figureList.ToArray())
+            {
+                if (house.name == name)
+                {
+                    return house;
+                }
+            }
+
+            return null;
+        }
 
         private static bool ApplyOperation(Stack<string> operands, string c)
         {
-            if (c == "F" && operands.Count == 5)
-            {
-                try
-                {
-                    House house = new House(operands.Pop(), Convert.ToInt32(operands.Pop()),
-                    Convert.ToInt32(operands.Pop()), Convert.ToInt32(operands.Pop()),
-                    Convert.ToInt32(operands.Pop()));
+            bool result = false;
+            int operandsCount = operands.Count;
 
-                    if ((house.h > 0 && house.w > 0) &&
-                        (house.y >= 0 && house.y <= Init.pictureBox.Height) &&
-                        (house.x >= 0 && house.x <= Init.pictureBox.Width) &&
-                        (house.x + house.w <= Init.pictureBox.Width && house.y + house.h <= Init.pictureBox.Height))
-                    {
-                        bool rect_in_list = false;
-                        foreach (House rec in ShapeContainer.figureList.ToArray())
-                        {
-                            if (rec.name == house.name)
-                            {
-                                rect_in_list = true;
-                                MessageBox.Show("Прямоугольник с таким именем уже существует");
-                                break;
-                            }
-                        }
-                        if (!rect_in_list)
-                        {
-                            ShapeContainer.AddFigure(house);
-                            house.Draw();
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Ошибка");
-                        return false;
-                    }
-                }
-           
-                catch (Exception ex)
+            if (c == "F" && operandsCount == 5)
+            {
+                int h = Convert.ToInt32(operands.Pop());
+                int w = Convert.ToInt32(operands.Pop());
+                string name = operands.Pop();
+                int y = Convert.ToInt32(operands.Pop());
+                int x = Convert.ToInt32(operands.Pop());
+
+                if (getHouseByName(name) != null)
                 {
-                    MessageBox.Show("Error: " + ex.Message);
+                    MessageBox.Show("Дом с таким именем уже существует");
+                    return result;
+                }
+
+                House house = new House(name, x, y, w, h);
+
+                if 
+                (
+                    (
+                        house.h > 0
+                        && house.w > 0
+                    ) && (
+                        house.y >= 0
+                        && house.y <= Init.pictureBox.Height
+                    ) && (
+                        house.x >= 0
+                        && house.x <= Init.pictureBox.Width
+                    ) && (
+                        house.x + house.w <= Init.pictureBox.Width
+                        && house.y + house.h <= Init.pictureBox.Height
+                    )
+                )
+                {
+                    ShapeContainer.AddFigure(house);
+                    house.Draw();
+                    result = true;
+                }
+                else
+                {
+                    MessageBox.Show("Некорректные координаты");
+                    result = false;
                 }
             }
 
-            else if (c == "M" && operands.Count == 3)
+            else if (c == "M" && operandsCount == 3)
             {
-                try
-                {
-                    string name = operands.Pop();
-                    if (!int.TryParse(operands.Pop(), out int dy) || !int.TryParse(operands.Pop(), out int dx))
-                    {
-                        MessageBox.Show("dx и dy должны быть целочисленными значениями");
-                        return false;
-                    }
+                string name = operands.Pop();
+                int dx = Convert.ToInt32(operands.Pop());
+                int dy = Convert.ToInt32(operands.Pop());
 
-                    bool in_list = false;
-                    foreach (House house in ShapeContainer.figureList.ToArray())
-                    {
-                        if (house.name == name)
-                        {
-                            in_list = true;
-                            house.MoveTo(dx, dy);
-                        }
-                    }
-                    if (!in_list)
-                    {
-                        MessageBox.Show("Прямоугольник с таким именем не найден");
-                        return false;
-                    }
-                    return true;
-                }
-                catch(Exception ex)
+                House house = getHouseByName(name);
+                if (house == null)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Дом с таким именем не найден");
+                    return result;
                 }
-                
+
+                house.MoveTo(dx, dy);
+                result = true;
             }
-            else if (c == "D" && operands.Count == 1)
+
+            else if (c == "D" && operandsCount == 1)
             {
-                try
+                string name = operands.Pop();
+                House house = getHouseByName(name);
+
+                if (house == null)
                 {
-                    string name = operands.Pop();
-                    bool in_list = false;
-                    foreach (House house in ShapeContainer.figureList.ToArray())
-                    {
-                        if (house.name == name)
-                        {
-                            in_list = true;
-                            Figure.DeleteF(house, true);
-                        }
-                    }
-                    if (!in_list)
-                    {
-                        MessageBox.Show("Прямоугольник с таким именем не найден");
-                        return false;
-                    }
-                    return true;
-                } 
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }   
+                    MessageBox.Show("Дом с таким именем не найден");
+                    return result;
+                }
+
+                Figure.DeleteF(house, true);
+                result = true;
             }
-            return false;
+
+            return result;
         }
 
     }
