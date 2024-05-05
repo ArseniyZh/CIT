@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -42,7 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button5 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -60,6 +62,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Количество элементов";
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(19, 78);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(148, 23);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "Из файла";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button2
             // 
@@ -99,12 +111,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Location = new System.Drawing.Point(12, 157);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(184, 122);
+            this.groupBox2.Size = new System.Drawing.Size(184, 151);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Метод сортировки";
@@ -146,7 +159,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 285);
+            this.groupBox3.Location = new System.Drawing.Point(12, 314);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 175);
             this.groupBox3.TabIndex = 3;
@@ -183,15 +196,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(19, 78);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(148, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Из файла";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // button6
+            //
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(6, 109);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(148, 23);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "Сохранить в файл";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 
@@ -230,6 +244,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button button6;
     }
 }
 

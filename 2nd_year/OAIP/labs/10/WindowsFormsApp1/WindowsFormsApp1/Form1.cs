@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
             button1.Enabled = true;
             button3.Enabled = false;
             button5.Enabled = true;
+            button6.Enabled = false;
             mainList.Clear();
 
             label1.Text = "Количество\nсравнений:";
@@ -80,6 +81,7 @@ namespace WindowsFormsApp1
             richTextBox1.Text += $"\n\n---> Отсортированный список\n{strList}\nИтерации";
 
             button3.Enabled = false;
+            button6.Enabled = true;
             label1.Text += $" {sorter.GetComparisons()}";
             label2.Text += $" {sorter.GetSwaps()}";
             label3.Text += $" {sorter.GetSortingTime()}ms";
@@ -137,6 +139,31 @@ namespace WindowsFormsApp1
                 {
                     // Обработка возможных ошибок при чтении файла
                     MessageBox.Show("Ошибка чтения файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Title = "Сохранить как";
+            saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            // Показываем диалог сохранения файла
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog1.FileName; // Получаем путь к файлу, который выбрал пользователь
+
+                try
+                {
+                    // Сохранение содержимого richTextBox1 в файл
+                    System.IO.File.WriteAllText(filePath, richTextBox1.Text);
+
+                    MessageBox.Show("Файл успешно сохранён.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    // Обработка ошибок при попытке записи в файл
+                    MessageBox.Show("Ошибка при сохранении файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

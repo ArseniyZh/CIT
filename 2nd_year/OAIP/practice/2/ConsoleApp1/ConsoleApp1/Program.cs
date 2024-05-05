@@ -1,7 +1,9 @@
 ﻿using ConsoleApp1;
+using System.Drawing;
 
 Theatre theatre = new Theatre();
 bool exit = false;
+
 
 while (!exit)
 {
