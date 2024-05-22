@@ -1,0 +1,62 @@
+﻿@model IEnumerable<API_Project1.Models.Message>
+
+@{
+    ViewData["Title"] = "Chat Page";
+}
+
+<h2>Chat</h2>
+
+<form asp-controller="Chat" asp-action="SendMessage" method="post">
+    <div class="form-group">
+        <label for="messageText">Your Message</label>
+        <input type="text" class="form-control" id="messageText" name="messageText" placeholder="Type a message...">
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+<hr />
+
+<div class="chat-messages">
+    @foreach (var message in Model)
+    {
+        <div>
+            @{
+                var displayName = string.IsNullOrWhiteSpace(message.FromUser.FirstName) && string.IsNullOrWhiteSpace(message.FromUser.LastName)
+                                  ? message.FromUser.Id
+                                  : message.FromUser.FirstName + " " + message.FromUser.LastName;
+            }
+            <strong>@displayName</strong>: @message.Text
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            function fetchMessages() {
+                $.ajax({
+                    url: '@Url.Action("GetMessages", "Chat")',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        var messagesContainer = $(".chat-messages");
+                        messagesContainer.empty(); // Очищаем контейнер перед добавлением новых сообщений
+                        data.forEach(function (item) {
+                            messagesContainer.append(`<div><strong>${item.user}</strong>: ${item.text}</div>`);
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching messages:", status, error);
+                    }
+                });
+            }
+
+            setInterval(fetchMessages, 1000); // Вызов функции каждую секунду
+        });
+    </script>
+}
+
