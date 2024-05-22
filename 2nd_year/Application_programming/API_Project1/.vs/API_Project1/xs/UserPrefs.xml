@@ -1,33 +1,44 @@
 ﻿<Properties StartupConfiguration="{32665847-A961-46D8-8BE0-EF40F27DE8FE}|Default">
-  <MonoDevelop.Ide.ItemProperties.API__Project1 PreferredExecutionTarget="/Applications/Arc.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="API_Project1/Controllers/HomeController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="API_Project1/Dockerfile">
     <Files>
-      <File FileName="API_Project1/Controllers/HomeController.cs" Line="18" Column="10" />
-      <File FileName="API_Project1/Models/MyModels.cs" Line="19" Column="2" />
+      <File FileName="API_Project1/Controllers/AccountController.cs" Line="119" Column="17" />
+      <File FileName="API_Project1/Controllers/ChatController.cs" Line="77" Column="10" />
+      <File FileName="API_Project1/Views/Chat/Chat.cshtml" Line="60" Column="14" />
+      <File FileName="API_Project1/Views/Shared/_Layout.cshtml" Line="31" Column="120" />
       <File FileName="docker-compose.yml" Line="1" Column="1" />
-      <File FileName="API_Project1/repositories/UserRepository.cs" Line="15" Column="1" />
+      <File FileName="API_Project1/Dockerfile" Line="23" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="API_Project1" expanded="True">
-            <Node name="API_Project1">
-              <Node name="Controllers" expanded="True">
-                <Node name="HomeController.cs" selected="True" />
-              </Node>
+            <Node name="API_Project1" expanded="True">
+              <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="repositories" expanded="True" />
+              <Node name="utils" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Account" expanded="True" />
+                <Node name="Chat" expanded="True" />
+                <Node name="Home" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="Dockerfile" selected="True" />
             </Node>
-            <Node name="docker-compose" expanded="True" />
+            <Node name="docker-compose" expanded="True">
+              <Node name="docker-compose.yml" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.API__Project1 PreferredExecutionTarget="/Applications/Arc.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>

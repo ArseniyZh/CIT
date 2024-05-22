@@ -24,5 +24,6 @@ RUN dotnet publish "API_Project1.csproj" -c Debug -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "API_Project1.dll"]
 
