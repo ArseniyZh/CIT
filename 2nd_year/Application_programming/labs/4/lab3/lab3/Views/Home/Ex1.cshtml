@@ -1,0 +1,23 @@
+﻿@{
+}
+
+<div class="container">
+    <form method="post">
+        <div class="form-group">
+            <label for="var_a">Переменная A</label>
+            <input required type="text" class="form-control" id="var_a" name="var_a">
+        </div>
+        <div class="form-group">
+            <label for="var_b">Переменная B</label>
+            <input required type="text" class="form-control" id="var_b" name="var_b">
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Обменять значения</button>
+    </form>
+    <br />
+    <div class="container">
+        <p>Значение переменной A после обмена: @ViewBag.VarA</p>
+        <p>Значение переменной B после обмена: @ViewBag.VarB</p>
+    </div>
+</div>
+
