@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище OlympiadsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="OlympiadParticipants">
+    <Key>
+      <PropertyRef Name="OlympiadParticipantID" />
+    </Key>
+    <Property Name="OlympiadParticipantID" Type="int" Nullable="false" />
+    <Property Name="ParticipantID" Type="int" />
+    <Property Name="OlympiadID" Type="int" />
+  </EntityType>
+  <EntityType Name="Olympiads">
+    <Key>
+      <PropertyRef Name="OlympiadID" />
+    </Key>
+    <Property Name="OlympiadID" Type="int" Nullable="false" />
+    <Property Name="OlympiadName" Type="varchar" MaxLength="255" />
+    <Property Name="OlympiadDate" Type="date" />
+    <Property Name="Location" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Participants">
+    <Key>
+      <PropertyRef Name="ParticipantID" />
+    </Key>
+    <Property Name="ParticipantID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" />
+    <Property Name="LastName" Type="varchar" MaxLength="255" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="SchoolID" Type="int" />
+  </EntityType>
+  <EntityType Name="Results">
+    <Key>
+      <PropertyRef Name="ResultID" />
+    </Key>
+    <Property Name="ResultID" Type="int" Nullable="false" />
+    <Property Name="ParticipantID" Type="int" />
+    <Property Name="OlympiadID" Type="int" />
+    <Property Name="Score" Type="int" />
+  </EntityType>
+  <EntityType Name="Schools">
+    <Key>
+      <PropertyRef Name="SchoolID" />
+    </Key>
+    <Property Name="SchoolID" Type="int" Nullable="false" />
+    <Property Name="SchoolName" Type="varchar" MaxLength="255" />
+    <Property Name="Location" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="SubjectID" />
+    </Key>
+    <Property Name="SubjectID" Type="int" Nullable="false" />
+    <Property Name="SubjectName" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="TaskID" Type="int" Nullable="false" />
+    <Property Name="OlympiadID" Type="int" />
+    <Property Name="SubjectID" Type="int" />
+    <Property Name="TaskDescription" Type="text" />
+  </EntityType>
+  <Association Name="FK__OlympiadP__Olymp__3F466844">
+    <End Role="Olympiads" Type="Self.Olympiads" Multiplicity="0..1" />
+    <End Role="OlympiadParticipants" Type="Self.OlympiadParticipants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Olympiads">
+        <PropertyRef Name="OlympiadID" />
+      </Principal>
+      <Dependent Role="OlympiadParticipants">
+        <PropertyRef Name="OlympiadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OlympiadP__Parti__3E52440B">
+    <End Role="Participants" Type="Self.Participants" Multiplicity="0..1" />
+    <End Role="OlympiadParticipants" Type="Self.OlympiadParticipants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participants">
+        <PropertyRef Name="ParticipantID" />
+      </Principal>
+      <Dependent Role="OlympiadParticipants">
+        <PropertyRef Name="ParticipantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Participa__Schoo__398D8EEE">
+    <End Role="Schools" Type="Self.Schools" Multiplicity="0..1" />
+    <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="SchoolID" />
+      </Principal>
+      <Dependent Role="Participants">
+        <PropertyRef Name="SchoolID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Results__Olympia__4316F928">
+    <End Role="Olympiads" Type="Self.Olympiads" Multiplicity="0..1" />
+    <End Role="Results" Type="Self.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Olympiads">
+        <PropertyRef Name="OlympiadID" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="OlympiadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Results__Partici__4222D4EF">
+    <End Role="Participants" Type="Self.Participants" Multiplicity="0..1" />
+    <End Role="Results" Type="Self.Results" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participants">
+        <PropertyRef Name="ParticipantID" />
+      </Principal>
+      <Dependent Role="Results">
+        <PropertyRef Name="ParticipantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tasks__OlympiadI__47DBAE45">
+    <End Role="Olympiads" Type="Self.Olympiads" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Olympiads">
+        <PropertyRef Name="OlympiadID" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="OlympiadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Tasks__SubjectID__48CFD27E">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="SubjectID" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище OlympiadsModelContainer">
+    <EntitySet Name="OlympiadParticipants" EntityType="Self.OlympiadParticipants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Olympiads" EntityType="Self.Olympiads" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Results" EntityType="Self.Results" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schools" EntityType="Self.Schools" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tasks" EntityType="Self.Tasks" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__OlympiadP__Olymp__3F466844" Association="Self.FK__OlympiadP__Olymp__3F466844">
+      <End Role="Olympiads" EntitySet="Olympiads" />
+      <End Role="OlympiadParticipants" EntitySet="OlympiadParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OlympiadP__Parti__3E52440B" Association="Self.FK__OlympiadP__Parti__3E52440B">
+      <End Role="Participants" EntitySet="Participants" />
+      <End Role="OlympiadParticipants" EntitySet="OlympiadParticipants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Participa__Schoo__398D8EEE" Association="Self.FK__Participa__Schoo__398D8EEE">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="Participants" EntitySet="Participants" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Results__Olympia__4316F928" Association="Self.FK__Results__Olympia__4316F928">
+      <End Role="Olympiads" EntitySet="Olympiads" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Results__Partici__4222D4EF" Association="Self.FK__Results__Partici__4222D4EF">
+      <End Role="Participants" EntitySet="Participants" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tasks__OlympiadI__47DBAE45" Association="Self.FK__Tasks__OlympiadI__47DBAE45">
+      <End Role="Olympiads" EntitySet="Olympiads" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Tasks__SubjectID__48CFD27E" Association="Self.FK__Tasks__SubjectID__48CFD27E">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

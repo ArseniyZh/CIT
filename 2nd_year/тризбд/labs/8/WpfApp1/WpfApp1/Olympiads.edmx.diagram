@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a7775ae242de4c04b3fb6d81fd552145" Name="Diagram1">
+        <EntityTypeShape EntityType="OlympiadsModel.OlympiadParticipants" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlympiadsModel.Olympiads" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlympiadsModel.Participants" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlympiadsModel.Results" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlympiadsModel.Schools" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlympiadsModel.Subjects" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OlympiadsModel.Tasks" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="OlympiadsModel.FK__OlympiadP__Olymp__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympiadsModel.FK__OlympiadP__Parti__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympiadsModel.FK__Results__Olympia__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympiadsModel.FK__Tasks__OlympiadI__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympiadsModel.FK__Participa__Schoo__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympiadsModel.FK__Results__Partici__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="OlympiadsModel.FK__Tasks__SubjectID__48CFD27E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

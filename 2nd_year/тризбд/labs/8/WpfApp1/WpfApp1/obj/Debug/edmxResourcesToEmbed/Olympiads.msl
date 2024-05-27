@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище OlympiadsModelContainer" CdmEntityContainer="OlympiadsEntities1">
+    <EntitySetMapping Name="OlympiadParticipants">
+      <EntityTypeMapping TypeName="OlympiadsModel.OlympiadParticipants">
+        <MappingFragment StoreEntitySet="OlympiadParticipants">
+          <ScalarProperty Name="OlympiadParticipantID" ColumnName="OlympiadParticipantID" />
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+          <ScalarProperty Name="OlympiadID" ColumnName="OlympiadID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Olympiads">
+      <EntityTypeMapping TypeName="OlympiadsModel.Olympiads">
+        <MappingFragment StoreEntitySet="Olympiads">
+          <ScalarProperty Name="OlympiadID" ColumnName="OlympiadID" />
+          <ScalarProperty Name="OlympiadName" ColumnName="OlympiadName" />
+          <ScalarProperty Name="OlympiadDate" ColumnName="OlympiadDate" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participants">
+      <EntityTypeMapping TypeName="OlympiadsModel.Participants">
+        <MappingFragment StoreEntitySet="Participants">
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Results">
+      <EntityTypeMapping TypeName="OlympiadsModel.Results">
+        <MappingFragment StoreEntitySet="Results">
+          <ScalarProperty Name="ResultID" ColumnName="ResultID" />
+          <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+          <ScalarProperty Name="OlympiadID" ColumnName="OlympiadID" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schools">
+      <EntityTypeMapping TypeName="OlympiadsModel.Schools">
+        <MappingFragment StoreEntitySet="Schools">
+          <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+          <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="OlympiadsModel.Subjects">
+        <MappingFragment StoreEntitySet="Subjects">
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="OlympiadsModel.Tasks">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="OlympiadID" ColumnName="OlympiadID" />
+          <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
