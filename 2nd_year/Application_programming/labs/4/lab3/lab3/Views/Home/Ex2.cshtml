@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container">
+    <h2>Подсчёт количества букв 'н'</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="sentence1">Предложение 1:</label>
+            <input type="text" class="form-control" id="sentence1" name="sentence1" placeholder="Надя купила носки" required>
+        </div>
+        <div class="form-group">
+            <label for="sentence2">Предложение 2:</label>
+            <input type="text" class="form-control" id="sentence2" name="sentence2" placeholder="Надежда умирает последней" required>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Подсчитать</button>
+    </form>
+
+    @if (ViewBag.CountN != null)
+    {
+        <h3>Общее количество букв 'н': @ViewBag.CountN</h3>
+    }
+</div>
