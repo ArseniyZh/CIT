@@ -1,0 +1,113 @@
+﻿<Window x:Class="WpfApp3.Window1" 
+
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+
+        xmlns:local="clr-namespace:WpfApp3" 
+
+        mc:Ignorable="d" 
+
+        Title="Window1" Height="450" Width="800">
+
+    <Window.Resources>
+
+        <x:Array x:Key="MyEditingModes" Type="{x:Type InkCanvasEditingMode}">
+
+            <x:Static Member="InkCanvasEditingMode.Ink"/>
+
+            <x:Static Member="InkCanvasEditingMode.Select"/>
+
+            <x:Static Member="InkCanvasEditingMode.EraseByPoint"/>
+
+            <x:Static Member="InkCanvasEditingMode.EraseByStroke"/>
+
+        </x:Array>
+
+        <x:Array x:Key="MyDrawingAttributes" Type="{x:Type DrawingAttributes}">
+
+            <DrawingAttributes x:Name="Зеленый" Color="Green" Width="3" Height="3"/>
+
+            <DrawingAttributes x:Name="Красный" Color="Red" Width="4" Height="4"/>
+
+            <DrawingAttributes x:Name="Синий" Color="Blue" Width="7" Height="7"/>
+
+        </x:Array>
+
+        <Style TargetType="InkCanvas">
+
+            <Style.Triggers>
+
+                <DataTrigger Binding="{Binding ElementName=lbEditingModes, Path=SelectedValue}" Value="{x:Null}">
+
+                    <Setter Property="IsEnabled" Value="False"/>
+
+                </DataTrigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="Purple">
+
+        <StackPanel>
+
+            <StackPanel Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0" >
+
+
+
+                <ListBox x:Name="Colors" ItemsSource="{StaticResource MyDrawingAttributes}">
+
+                    <ListBox.ItemTemplate>
+
+                        <!-- Создание шаблона данных, где каждый элемент отображается как TextBlock с текстом, связанным с свойством Color -->
+
+                        <DataTemplate>
+
+                            <TextBlock Text="{Binding Path=Color}"/>
+
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+
+
+
+            </StackPanel>
+
+
+
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 10 ">
+
+                <ListBox x:Name="lbEditingModes" ItemsSource="{StaticResource MyEditingModes}"/>
+
+            </StackPanel>
+
+            <Button Content="Перейтик 1 заданию" HorizontalAlignment="Left" Click="Button_Click"/>
+
+        </StackPanel>
+
+        <StackPanel>
+
+            <InkCanvas x:Name="ink" Margin="140 10 20 0" DockPanel.Dock="Top" DefaultDrawingAttributes="{Binding ElementName=Colors, Path=SelectedValue}" EditingMode="{Binding ElementName=lbEditingModes, Path=SelectedValue}" Height="384">
+
+            </InkCanvas>
+
+        </StackPanel>
+
+
+
+
+
+    </Grid>
+
+
+
+</Window>

@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
         {
             string fromEmail = "Sayfutdinovaam@gmail.com";
             string fromPassword = "xrqwmypnjpjrtdym";
+            MessageBox.Show(code);
 
             try
             {

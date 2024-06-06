@@ -32,7 +32,7 @@ namespace WpfApp1
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new OlympiadsEntities1())  // Создайте новый экземпляр для каждой операции
+            using (var db = new OlympiadsEntities1())
             {
                 var existingSubject = db.Subjects.Find(_subject.SubjectID);
                 if (existingSubject != null)
