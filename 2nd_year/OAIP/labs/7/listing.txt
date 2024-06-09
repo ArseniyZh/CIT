@@ -1,0 +1,592 @@
+# Задание 2
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox1.Text, out int a) && int.TryParse(textBox2.Text, out int b) && int.TryParse(textBox3.Text, out int c))
+            {
+                if (a >= b && b >= c)
+                {
+                    a *= 2;
+                    b *= 2;
+                    c *= 2;
+                }
+                else
+                {
+                    a = Math.Abs(a);
+                    b = Math.Abs(b);
+                    c = Math.Abs(c);
+                }
+
+                label1.Text = $"Результат: a = {a}, b = {b}, c = {c}";
+            }
+            else
+            {
+                MessageBox.Show("Введите корректные значения для переменных a, b и c.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+
+
+# Задание 3
+
+namespace _3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox1.Text, out int x))
+            {
+                if (x >= 130)
+                {
+                    float result = 1;
+
+                    for (int i = 2; i <= 128; i++)
+                    {
+                        result *= (x - i) / (x - i - 1);
+                    }
+
+                    label2.Text = $"���������: {result}";
+                }
+                else
+                {
+                    MessageBox.Show("�������� x �� ����� ���� ������ 130.", "������", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("������� ���������� �������� ��� ���������� x.", "������", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+
+
+# Задание 4
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _4
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Получаем порядок матрицы из текстового поля
+            if (int.TryParse(textBox1.Text, out int order) && order > 0)
+            {
+                // Генерируем случайную квадратную матрицу
+                int[,] originalMatrix = GenerateRandomMatrix(order);
+
+                // Создаем новую матрицу согласно условию
+                int[,] resultMatrix = CalculateNewMatrix(originalMatrix);
+
+                // Отображаем исходную матрицу в первой вкладке
+                DisplayMatrix(originalMatrix, "Исходная матрица", dataGridView1);
+
+                // Отображаем результирующую матрицу во второй вкладке
+                DisplayMatrix(resultMatrix, "Результирующая матрица", dataGridView2);
+            }
+            else
+            {
+                MessageBox.Show("Введите корректный порядок матрицы (целое положительное число).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int[,] GenerateRandomMatrix(int order)
+        {
+            Random random = new Random();
+            int[,] matrix = new int[order, order];
+
+            for (int i = 0; i < order; i++)
+            {
+                for (int j = 0; j < order; j++)
+                {
+                    matrix[i, j] = random.Next(101); // Генерируем случайные числа от 0 до 100
+                }
+            }
+
+            return matrix;
+        }
+
+        private int[,] CalculateNewMatrix(int[,] originalMatrix)
+        {
+            int order = originalMatrix.GetLength(0);
+            int[,] resultMatrix = new int[order, order];
+
+            for (int i = 0; i < order; i++)
+            {
+                for (int j = 0; j < order; j++)
+                {
+                    if (originalMatrix[i, j] > originalMatrix[i, i])
+                    {
+                        resultMatrix[i, j] = 1;
+                    }
+                    else
+                    {
+                        resultMatrix[i, j] = 0;
+                    }
+                }
+            }
+
+            return resultMatrix;
+        }
+
+        private void DisplayMatrix(int[,] matrix, string header, DataGridView dataGridView)
+        {
+            dataGridView.Columns.Clear();
+            dataGridView.Rows.Clear();
+            dataGridView.ColumnCount = matrix.GetLength(1);
+
+            dataGridView.Rows.Add(matrix.GetLength(0));
+            dataGridView.Rows[0].HeaderCell.Value = header;
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    dataGridView[j, i].Value = matrix[i, j];
+                }
+            }
+
+            foreach (DataGridViewColumn column in dataGridView.Columns)
+            {
+                column.Width = 25;
+            }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+
+
+
+# Задание 5.2
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _5._2
+{
+    public partial class Form1 : Form
+    {
+        private int[] array;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Получаем введенные пользователем значения из TextBox и разбиваем их по пробелам
+            string[] inputValues = textBox1.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Проверяем, что были введены значения
+            if (inputValues.Length == 0)
+            {
+                MessageBox.Show("Введите элементы массива через пробел.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Создаем массив для хранения введенных элементов
+            array = new int[inputValues.Length];
+
+            // Заполняем массив и выводим его в консоль для отладки
+            for (int i = 0; i < inputValues.Length; i++)
+            {
+                if (int.TryParse(inputValues[i], out array[i]))
+                {
+                    Console.WriteLine($"Элемент {i + 1}: {array[i]}");
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректные целые числа.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            // Вызываем функцию для нахождения минимального элемента и увеличения его в два раза
+            CalculateMinMaxElement(array);
+
+            // Выводим обновленный массив в TextBox
+            //outputTextBox.Text = string.Join(" ", array);
+            _ = MessageBox.Show($"Итоговый список: {string.Join(" ", array)}");
+        }
+
+        private unsafe void CalculateMinMaxElement(int[] array)
+        {
+            if (array == null || array.Length == 0)
+            {
+                return;
+            }
+
+            fixed (int* ptr = array)
+            {
+                int* minPtr = ptr;
+                for (int i = 1; i < array.Length; i++)
+                {
+                    if (array[i] < *minPtr)
+                    {
+                        minPtr = ptr + i;
+                    }
+                }
+
+                *minPtr *= 2;
+            }
+        }
+    }
+}
+
+
+
+# Задание 5.3
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _5._3
+{
+    public partial class Form1 : Form
+    {
+        private int[,] matrix;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox1.Text, out int rows) && int.TryParse(textBox2.Text, out int columns))
+            {
+                if (rows > 0 && columns > 0)
+                {
+                    // Создаем новую матрицу с заданными размерами
+                    matrix = GenerateRandomMatrix(rows, columns);
+
+                    // Выводим матрицу в TextBox
+                    DisplayMatrix(matrix, dataGridView2);
+                    DisplayMatrix(RotateMatrix(matrix), dataGridView1);
+                }
+                else
+                {
+                    MessageBox.Show("Введите корректные значения для размерности матрицы.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Введите корректные значения для размерности матрицы.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int[,] GenerateRandomMatrix(int rows, int columns)
+        {
+            int[,] result = new int[rows, columns];
+            Random random = new Random();
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    result[i, j] = random.Next(-20, 21);
+                }
+            }
+
+            return result;
+        }
+
+        private int[,] RotateMatrix(int[,] originalMatrix)
+        {
+            int rows = originalMatrix.GetLength(0);
+            int columns = originalMatrix.GetLength(1);
+            int[,] rotatedMatrix = new int[columns, rows];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    rotatedMatrix[j, rows - 1 - i] = originalMatrix[i, j];
+                }
+            }
+
+            return rotatedMatrix;
+        }
+
+        private void DisplayMatrix(int[,] matrix, DataGridView dataGridView)
+        {
+            dataGridView.Rows.Clear();
+            dataGridView.Columns.Clear();
+
+            int rows = matrix.GetLength(0);
+            int columns = matrix.GetLength(1);
+
+            // Добавляем столбцы в DataGridView
+            for (int j = 0; j < columns; j++)
+            {
+                dataGridView.Columns.Add($"column{j}", $"Column {j + 1}");
+            }
+
+            // Заполняем DataGridView данными из матрицы
+            for (int i = 0; i < rows; i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(dataGridView);
+
+                for (int j = 0; j < columns; j++)
+                {
+                    row.Cells[j].Value = matrix[i, j];
+                }
+
+                dataGridView.Rows.Add(row);
+            }
+        }
+    }
+}
+
+
+
+# Задание 5
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _5
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox1.Text, out double totalVoltage) &&
+                double.TryParse(textBox2.Text, out double current) &&
+                double.TryParse(textBox3.Text, out double resistance1) &&
+                double.TryParse(textBox4.Text, out double resistance2))
+            {
+                double totalResistance, voltageDrop1, voltageDrop2;
+
+                CalculateCircuit(totalVoltage, current, resistance1, resistance2, out totalResistance, out voltageDrop1, out voltageDrop2);
+                label5.Text = $"Общее сопротивление в цепи: {totalResistance} Ом\n" +
+                                   $"Падение напряжения на первом резисторе: {voltageDrop1} Вольт\n" +
+                                   $"Падение напряжения на втором резисторе: {voltageDrop2} Вольт";
+            }
+            else
+            {
+                label5.Text = "Пожалуйста, введите корректные значения.";
+            }
+        }
+
+        private void CalculateCircuit(double totalVoltage, double current, double resistance1, double resistance2, out double totalResistance, out double voltageDrop1, out double voltageDrop2)
+        {
+            // Вычисляем общее сопротивление в цепи (резисторы в последовательном соединении)
+            totalResistance = resistance1 + resistance2;
+
+            // Вычисляем падение напряжения на первом резисторе
+            voltageDrop1 = current * resistance1;
+
+            // Вычисляем падение напряжения на втором резисторе
+            voltageDrop2 = current * resistance2;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
+
+
+# Задание 6
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace _6
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox2.Text, out int hours) &&
+                int.TryParse(textBox1.Text, out int minutes) && hours >= 0 && minutes >= 0)
+            {
+                Time time = new Time(hours, minutes);
+                int totalMinutes = time.MinutesTotal();
+
+                MessageBox.Show($"{hours} часов {minutes} минут составляет {totalMinutes} минут.");
+            }
+            else
+            {
+                MessageBox.Show("Введите корректные значения для часов и минут.");
+            }
+        }
+    }
+
+    class Time
+    {
+        public int Hours { get; set; }
+        public int Minutes { get; set; }
+
+        public Time(int hours, int minutes)
+        {
+            Hours = hours;
+            Minutes = minutes;
+        }
+
+        public int MinutesTotal()
+        {
+            return Hours * 60 + Minutes;
+        }
+    }
+}

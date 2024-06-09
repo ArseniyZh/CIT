@@ -1,0 +1,530 @@
+# Form 1
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        List<int> mainList = new List<int>();
+
+        private void clearAll()
+        {
+            richTextBox1.Clear();
+            button1.Enabled = true;
+            button3.Enabled = false;
+            button5.Enabled = true;
+            button6.Enabled = false;
+            mainList.Clear();
+
+            label1.Text = "Количество\nсравнений:";
+            label2.Text = "Количество\nперестановок:";
+            label3.Text = "Время\nсортировки:";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Сгенерировать
+
+            int.TryParse(textBox1.Text, out int n);
+
+            if (n <= 0)
+            {
+                MessageBox.Show("Количество элементов должно быть больше 0");
+                return;
+            }
+
+            mainList = Utils.GenerateRandomList(n);
+            string strList = string.Join(" ", mainList);
+
+            richTextBox1.Text = $"---> Текущий список\n{strList}";
+            button1.Enabled = false;
+            button3.Enabled = true;
+            button5.Enabled = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Очистить все
+
+            clearAll();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Отсортировать
+
+            Sorter sorter;
+            int selectedSort = comboBox1.SelectedIndex;
+
+            if (selectedSort == 0)
+            {
+                sorter = new SelectionSort();
+            } else
+            {
+                sorter = new RadixSort();
+            }
+
+            sorter.Sort(mainList);
+            string strList = string.Join(" ", mainList);
+            richTextBox1.Text += $"\n\n---> Отсортированный список\n{strList}\nИтерации";
+
+            button3.Enabled = false;
+            button6.Enabled = true;
+            label1.Text += $" {sorter.GetComparisons()}";
+            label2.Text += $" {sorter.GetSwaps()}";
+            label3.Text += $" {sorter.GetSortingTime()}ms";
+            List<List<int>> ProcessedList = sorter.GetProcessedList();
+            for (int i = 0;  i < ProcessedList.Count; i++)
+            {
+                List<int> currentList = ProcessedList[i];
+                richTextBox1.Text += "\n" + string.Join(" ", currentList);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            clearAll();
+
+            // Настройка OpenFileDialog
+            openFileDialog1.Title = "Выберите текстовый файл";
+            openFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*"; // Фильтр для текстовых файлов
+
+            // Показываем диалог и проверяем, был ли файл выбран
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog1.FileName; // Получаем полный путь к файлу
+
+                try
+                {
+                    // Чтение файла и вывод его содержимого
+                    string fileContent = System.IO.File.ReadAllText(filePath);
+                    string[] numbersStr = fileContent.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string num in numbersStr)
+                    {
+                        if (int.TryParse(num, out int parsedNumber))
+                        {
+                            mainList.Add(parsedNumber);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Не удалось преобразовать '{num}' в число.");
+                        }
+                    }
+                    string strList = string.Join(" ", mainList);
+
+                    richTextBox1.Text = $"---> Текущий список\n{strList}";
+                    button1.Enabled = false;
+                    button3.Enabled = true;
+                    button5.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    // Обработка возможных ошибок при чтении файла
+                    MessageBox.Show("Ошибка чтения файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Title = "Сохранить как";
+            saveFileDialog1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            // Показываем диалог сохранения файла
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog1.FileName; // Получаем путь к файлу, который выбрал пользователь
+
+                try
+                {
+                    // Сохранение содержимого richTextBox1 в файл
+                    System.IO.File.WriteAllText(filePath, richTextBox1.Text);
+
+                    MessageBox.Show("Файл успешно сохранён.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    // Обработка ошибок при попытке записи в файл
+                    MessageBox.Show("Ошибка при сохранении файла: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+    }
+}
+
+
+
+# Form 2
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp1
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+            InitializeDataGridView();
+        }
+
+        public static void AddAnalyzRow(DataGridView dataGridView, int n, ref List<SortResult> results)
+        {
+            Sorter selectionSort = new SelectionSort();
+            Sorter radixSort = new RadixSort();
+
+            List<int> analyzList1 = Utils.GenerateRandomList(n);
+            List<int> analyzList2 = new List<int>(analyzList1); // Копируем
+
+            SortResult result1 = selectionSort.Sort(analyzList1, false);
+            SortResult result2 = radixSort.Sort(analyzList2, false);
+
+            results.Add(result1);
+            results.Add(result2);
+
+            string analyzString1 = $"С: {result1.Comparisons} П: {result1.Swaps} В: {result1.Time}ms";
+            string analyzString2 = $"С: {result2.Comparisons} П: {result2.Swaps} В: {result2.Time}ms";
+
+            DataGridViewRow row = new DataGridViewRow();
+            row.CreateCells(dataGridView);
+            row.SetValues(analyzString1, analyzString2);
+            row.HeaderCell.Value = $"{n}";
+            dataGridView.Rows.Add(row);
+        }
+
+        public void AnalyzeAndDisplayResults(List<SortResult> results)
+        {
+            if (results.Count == 0) return;
+
+            // Нахождение наилучших и наихудших результатов по количеству сравнений
+            var bestByComparisons = results.OrderBy(r => r.Comparisons).First();
+            var worstByComparisons = results.OrderByDescending(r => r.Comparisons).First();
+
+            // Вывод результатов
+            string message = $"Лучший метод сортировки по минимальному количеству сравнений ({bestByComparisons.Comparisons} сравнений) для массива из {bestByComparisons.ElementsCount} элементов - {bestByComparisons.MethodName}.\n" +
+                             $"Худший метод сортировки по максимальному количеству сравнений ({worstByComparisons.Comparisons} сравнений) для массива из {worstByComparisons.ElementsCount} элементов - {worstByComparisons.MethodName}.";
+
+            label1.Text = message;
+
+            // MessageBox.Show(message, "Анализ эффективности сортировок", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void InitializeDataGridView()
+        {
+            DataGridView dataGridView = new DataGridView
+            {
+                Location = new System.Drawing.Point(0, 0),
+                Size = new System.Drawing.Size(600, 150),
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+            };
+
+            Controls.Add(dataGridView);
+
+            // Добавляем столбцы
+            dataGridView.Columns.Add("Column1", "Метод выбора");
+            dataGridView.Columns.Add("Column2", "Метод поразрядной сортировки");
+
+            List<SortResult> allSortResults = new List<SortResult>();
+            // Создаем строки с данными и заголовками
+            AddAnalyzRow(dataGridView, 10, ref allSortResults);
+            AddAnalyzRow(dataGridView, 20, ref allSortResults);
+            AddAnalyzRow(dataGridView, 30, ref allSortResults);
+            AddAnalyzRow(dataGridView, 40, ref allSortResults);
+            AddAnalyzRow(dataGridView, 50, ref allSortResults);
+
+            AnalyzeAndDisplayResults(allSortResults);
+
+            // Обновляем внешний вид заголовков строк
+            dataGridView.RowHeadersVisible = true; // Убедитесь, что заголовки строк видимы
+            dataGridView.AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders); // Опционально: Автоматически изменить ширину заголовков строк
+        }
+    }
+}
+
+
+
+# RadixSort
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WindowsFormsApp1
+{
+    public class RadixSort : Sorter
+    {
+        public override SortResult Sort(List<int> list, bool saveProcess = true)
+        {
+            ResetStats();  // Сброс статистики перед началом сортировки
+            Stopwatch stopwatch = new Stopwatch();
+            StartTimer(stopwatch);  // Запуск таймера
+
+            int i, m = list[0], exp = 1, n = list.Count;
+            List<int> b = new List<int>(new int[n]);
+
+            // Найти максимальное число в массиве для определения количества цифр
+            for (i = 1; i < n; i++)
+            {
+                IncrementComparison();
+                if (list[i] > m)
+                    m = list[i];
+            }
+
+            // Сортировать числа по каждому разряду
+            while (m / exp > 0)
+            {
+                int[] bucket = new int[10];
+
+                // Счетчик чисел в каждом бакете
+                for (i = 0; i < n; i++)
+                {
+                    IncrementComparison();
+                    bucket[(list[i] / exp) % 10]++;
+                }
+
+                // Накапливать сумму для определения индексов
+                for (i = 1; i < 10; i++)
+                    bucket[i] += bucket[i - 1];
+
+                // Создание временного массива для сортировки по разряду
+                for (i = n - 1; i >= 0; i--)
+                {
+                    b[--bucket[(list[i] / exp) % 10]] = list[i];
+                    IncrementSwap();  // Считаем операции перемещения
+                }
+
+                // Копировать временный массив в основной
+                for (i = 0; i < n; i++)
+                    list[i] = b[i];
+
+                exp *= 10;
+
+                if (saveProcess == true)
+                {
+                    AddToProcessed(list);  // Добавление состояния списка после каждой итерации
+                }
+            }
+
+            StopTimer(stopwatch);  // Остановка таймера
+
+            return new SortResult
+            {
+                MethodName = "Radix Sort",
+                Comparisons = this.Comparisons,
+                Swaps = this.Swaps,
+                Time = stopwatch.Elapsed.TotalMilliseconds,
+                ElementsCount = list.Count
+            };
+        }
+    }
+}
+
+
+
+# SelectionSort
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WindowsFormsApp1
+{
+    public class SelectionSort : Sorter
+    {
+        public override SortResult Sort(List<int> list, bool saveProcess = true)
+        {
+            ResetStats();
+            Stopwatch stopwatch = new Stopwatch();
+            StartTimer(stopwatch);
+
+            int n = list.Count;
+            for (int i = 0; i < n - 1; i++)
+            {
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
+                {
+                    IncrementComparison();
+                    if (list[j] < list[minIndex])
+                        minIndex = j;
+                }
+
+                if (minIndex != i)
+                {
+                    int temp = list[minIndex];
+                    list[minIndex] = list[i];
+                    list[i] = temp;
+                    IncrementSwap();
+                }
+
+                if (saveProcess == true)
+                {
+                    AddToProcessed(list);
+                }
+            }
+
+            StopTimer(stopwatch);
+
+            return new SortResult
+            {
+                MethodName = "Selection Sort",
+                Comparisons = this.Comparisons,
+                Swaps = this.Swaps,
+                Time = stopwatch.Elapsed.TotalMilliseconds,
+                ElementsCount = list.Count
+            };
+        }
+    }
+
+}
+
+
+# Sorter
+
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WindowsFormsApp1
+{
+    public abstract class Sorter
+    {
+        protected int Comparisons { get; private set; }
+        protected int Swaps { get; private set; }
+        protected double SortingTime { get; private set; }
+        protected List<List<int>> ProcessedList { get; private set; } = new List<List<int>>();
+
+        public abstract SortResult Sort(List<int> list, bool saveProcess = true);
+
+        protected void ResetStats()
+        {
+            Comparisons = 0;
+            Swaps = 0;
+            SortingTime = 0.0;
+            ProcessedList.Clear();
+        }
+
+        protected void IncrementComparison()
+        {
+            Comparisons++;
+        }
+
+        protected void IncrementSwap()
+        {
+            Swaps++;
+        }
+
+        protected void StartTimer(Stopwatch stopwatch)
+        {
+            stopwatch.Restart();
+        }
+
+        protected void StopTimer(Stopwatch stopwatch)
+        {
+            stopwatch.Stop();
+            SortingTime = stopwatch.Elapsed.TotalMilliseconds;
+        }
+
+        protected void AddToProcessed(List<int> list)
+        {
+            ProcessedList.Add(new List<int>(list));
+        }
+
+        public int GetComparisons()
+        {
+            return Comparisons;
+        }
+
+        public int GetSwaps()
+        {
+            return Swaps;
+        }
+
+        public double GetSortingTime()
+        {
+            return SortingTime;
+        }
+
+        public List<List<int>> GetProcessedList()
+        {
+            return ProcessedList;
+        }
+    }
+
+    public class SortResult
+    {
+        public string MethodName { get; set; }
+        public int Comparisons { get; set; }
+        public int Swaps { get; set; }
+        public double Time { get; set; }
+        public int ElementsCount { get; set; }
+    }
+
+}
+
+
+
+# Utils
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WindowsFormsApp1
+{
+    internal class Utils
+    {
+        public static List<int> GenerateRandomList(int n)
+        {
+            Random random = new Random(); // Создаем экземпляр генератора случайных чисел
+            List<int> list = new List<int>();
+
+            for (int i = 0; i < n; i++)
+            {
+                list.Add(random.Next(0, 100)); // Генерируем случайное число от 0 до 99
+            }
+
+            return list;
+        }
+    }
+}

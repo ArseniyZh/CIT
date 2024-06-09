@@ -1,0 +1,257 @@
+# form 1
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace oaip_9
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            Init.pen = new Pen(Color.Aqua, 5);
+            Init.bitmap = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
+            Init.pictureBox = pictureBox1;
+        }
+
+        private void textBoxInputString_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (RPN.CalculateRPN(textBoxInputString.Text))
+                {
+                    richTextBox1.Text += textBoxInputString.Text + " - выполнено\n";
+                }
+                else
+                {
+                    richTextBox1.Text += textBoxInputString.Text + " - не выполнено\n";
+                }
+                textBoxInputString.Text = "";
+            }
+        }
+    }
+}
+
+
+
+# init
+
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace oaip_9
+{
+    public static class Init
+    {
+        public static Bitmap bitmap;
+        public static PictureBox pictureBox;
+        public static Pen pen;
+
+    }
+}
+
+
+# RPN
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+namespace oaip_9
+{
+    static class RPN
+    {
+        private static bool IsOperator(string c)
+        {
+            if (c == "F" || c == "M" || c == "D")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        public static bool CalculateRPN(string expression)
+        {
+            Stack<string> operandsStack = new Stack<string>();
+            string temporary_storage = "";
+
+            foreach (char c in expression)
+            {
+                if (c == '.' && temporary_storage == "")
+                {
+                    temporary_storage += ".";
+                    
+                }
+                else if (c == '.')
+                {
+                    operandsStack.Push(temporary_storage);
+                    temporary_storage = "";
+                }
+                else
+                {
+                    temporary_storage += c;
+                }
+            }
+            operandsStack.Push(temporary_storage);
+
+
+            bool result = false;
+            if (IsOperator(operandsStack.Peek()))
+            {
+                try
+                {
+                    result = ApplyOperation(operandsStack, operandsStack.Pop());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ошибка: " + ex.Message);
+                }
+            }
+
+            operandsStack.Clear();
+            return result;
+        }
+
+        private static House getHouseByName(string name)
+        {
+            foreach (House house in ShapeContainer.figureList.ToArray())
+            {
+                if (house.name == name)
+                {
+                    return house;
+                }
+            }
+
+            return null;
+        }
+
+        private static bool ApplyOperation(Stack<string> operands, string c)
+        {
+            bool result = false;
+            int operandsCount = operands.Count;
+
+            if (c == "F" && operandsCount == 5)
+            {
+                int h = Convert.ToInt32(operands.Pop());
+                int w = Convert.ToInt32(operands.Pop());
+                string name = operands.Pop();
+                int y = Convert.ToInt32(operands.Pop());
+                int x = Convert.ToInt32(operands.Pop());
+
+                if (getHouseByName(name) != null)
+                {
+                    MessageBox.Show("Дом с таким именем уже существует");
+                    return result;
+                }
+
+                House house = new House(name, x, y, w, h);
+
+                if 
+                (
+                    (
+                        house.h > 0
+                        && house.w > 0
+                    ) && (
+                        house.y >= 0
+                        && house.y <= Init.pictureBox.Height
+                    ) && (
+                        house.x >= 0
+                        && house.x <= Init.pictureBox.Width
+                    ) && (
+                        house.x + house.w <= Init.pictureBox.Width
+                        && house.y + house.h <= Init.pictureBox.Height
+                    )
+                )
+                {
+                    ShapeContainer.AddFigure(house);
+                    house.Draw();
+                    result = true;
+                }
+                else
+                {
+                    MessageBox.Show("Некорректные координаты");
+                    result = false;
+                }
+            }
+
+            else if (c == "M" && operandsCount == 3)
+            {
+                string name = operands.Pop();
+                int dx = Convert.ToInt32(operands.Pop());
+                int dy = Convert.ToInt32(operands.Pop());
+
+                House house = getHouseByName(name);
+                if (house == null)
+                {
+                    MessageBox.Show("Дом с таким именем не найден");
+                    return result;
+                }
+
+                house.MoveTo(dx, dy);
+                result = true;
+            }
+
+            else if (c == "D" && operandsCount == 1)
+            {
+                string name = operands.Pop();
+                House house = getHouseByName(name);
+
+                if (house == null)
+                {
+                    MessageBox.Show("Дом с таким именем не найден");
+                    return result;
+                }
+
+                Figure.DeleteF(house, true);
+                result = true;
+            }
+
+            return result;
+        }
+
+    }
+}
+
+
+# ShapeContainer
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace oaip_9
+{
+    internal class ShapeContainer
+    {
+        public static List<Figure> figureList = new List<Figure>();
+        public static void AddFigure(Figure figure)
+        {
+            figureList.Add(figure);
+        }
+    }
+}
