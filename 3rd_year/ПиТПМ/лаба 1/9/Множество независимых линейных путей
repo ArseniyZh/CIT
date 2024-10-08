@@ -1,0 +1,6 @@
+graph TD
+    P1[Path 1: Start -> Получить N и A -> Инициализировать unique_elements -> i < N -> is_unique = True -> Нет совпадений -> Добавить Ai в unique_elements -> Увеличить i -> Конец]
+    P2[Path 2: Start -> Получить N и A -> Инициализировать unique_elements -> i < N -> is_unique = True -> j < N -> Нет совпадений -> Проверка is_unique -> Добавить Ai в unique_elements -> Увеличить i -> Конец]
+    P3[Path 3: Start -> Получить N и A -> Инициализировать unique_elements -> i < N -> is_unique = True -> j < N -> Найдено совпадение -> is_unique = False -> Проверка is_unique -> Пропустить добавление -> Увеличить i -> Конец]
+    P4[Path 4: Start -> Получить N и A -> Инициализировать unique_elements -> i < N -> is_unique = True -> j < N -> Нет совпадений -> Увеличить j -> Новый проход -> Найдено совпадение -> is_unique = False -> Проверка is_unique -> Пропустить добавление -> Увеличить i -> Конец]
+    P5[Path 5: Start -> Получить N и A -> Инициализировать unique_elements -> i < N -> is_unique = True -> j < N -> Нет совпадений -> Увеличить j -> Новый проход -> Нет совпадений -> Проверка is_unique -> Добавить Ai в unique_elements -> Увеличить i -> Конец]

@@ -1,0 +1,8 @@
+graph TD
+    Path1[Путь 1: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> num > 0 -> Увеличить current_length -> current_min is None -> Обновить current_min -> Следующий num -> Конец]
+    Path2[Путь 2: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> num > 0 -> Увеличить current_length -> current_min не обновляется -> Следующий num -> Конец]
+    Path3[Путь 3: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> num <= 0 -> current_length > max_length -> Обновить max_length и min_element -> Сброс current_length и current_min -> Следующий num -> Конец]
+    Path4[Путь 4: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> num <= 0 -> current_length == max_length и current_min < min_element -> Обновить min_element -> Сброс current_length и current_min -> Следующий num -> Конец]
+    Path5[Путь 5: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> num <= 0 -> current_length <= max_length -> Сброс current_length и current_min -> Следующий num -> Конец]
+    Path6[Путь 6: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> Проверка после цикла -> current_length > max_length -> Обновить min_element -> Конец]
+    Path7[Путь 7: Старт -> Получить N и A -> Инициализировать переменные -> Для каждого num в A -> Проверка после цикла -> current_length == max_length и current_min < min_element -> Обновить min_element -> Конец]

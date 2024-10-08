@@ -1,0 +1,23 @@
+graph TD
+    Start[Старт] --> A[Получить N и A от пользователя]
+    A --> B[Инициализировать max_length = 0, min_element = None, current_length = 0, current_min = None]
+    B --> C[Для каждого num в A]
+    C --> D{num > 0?}
+    D -- Да --> E[Увеличить current_length]
+    E --> F{current_min is None или num < current_min?}
+    F -- Да --> G[Обновить current_min = num]
+    F -- Нет --> H[Переход к следующему элементу]
+    G --> H
+    H --> C
+    D -- Нет --> I{current_length > max_length?}
+    I -- Да --> J[Обновить max_length и min_element]
+    I -- Нет --> K{current_length == max_length и current_min < min_element?}
+    K -- Да --> L[Обновить min_element]
+    K -- Нет --> M[Сброс current_length и current_min]
+    J --> M
+    L --> M
+    M --> C
+    C --> N[Проверка после цикла: current_length > max_length или current_length == max_length и current_min < min_element]
+    N --> O[Обновить min_element]
+    O --> P[Конец программы]
+    
