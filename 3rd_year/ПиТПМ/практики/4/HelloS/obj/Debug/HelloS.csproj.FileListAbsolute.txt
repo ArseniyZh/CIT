@@ -1,0 +1,16 @@
+C:\Users\amazi\source\repos\HelloS\bin\Debug\HelloS.exe.config
+C:\Users\amazi\source\repos\HelloS\bin\Debug\HelloS.exe
+C:\Users\amazi\source\repos\HelloS\bin\Debug\HelloS.pdb
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.csproj.AssemblyReference.cache
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.csproj.SuggestedBindingRedirects.cache
+C:\Users\amazi\source\repos\HelloS\obj\Debug\MainWindow.g.cs
+C:\Users\amazi\source\repos\HelloS\obj\Debug\App.g.cs
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS_MarkupCompile.cache
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS_MarkupCompile.lref
+C:\Users\amazi\source\repos\HelloS\obj\Debug\MainWindow.baml
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.g.resources
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.Properties.Resources.resources
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.csproj.GenerateResource.cache
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.csproj.CoreCompileInputs.cache
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.exe
+C:\Users\amazi\source\repos\HelloS\obj\Debug\HelloS.pdb
