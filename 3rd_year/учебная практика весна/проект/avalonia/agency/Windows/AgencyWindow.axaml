@@ -1,0 +1,80 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="agency.Windows.AgencyWindow"
+        Title="Кабинет риэлтора"
+        Width="800" Height="500"
+        MinWidth="800" MinHeight="450"
+        MaxWidth="900" MaxHeight="550"
+        WindowStartupLocation="CenterScreen"
+        Background="#f0f6fc">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Заголовок -->
+            <RowDefinition Height="Auto"/> <!-- Клиенты -->
+            <RowDefinition Height="Auto"/> <!-- Недвижимость -->
+            <RowDefinition Height="Auto"/> <!-- Риэлторы -->
+            <RowDefinition Height="Auto"/> <!-- Сделки -->
+            <RowDefinition Height="*"/>    <!-- Лого и назад -->
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Кабинет агента (риэлтора)"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Grid.Row="0"
+                   Margin="0,0,0,20" />
+
+        <!-- Кнопки -->
+        <Button Content="Клиенты"
+                Click="ClientsBtn_Click"
+                Width="200"
+                HorizontalAlignment="Center"
+                Grid.Row="1"
+                Margin="0,0,0,10" />
+
+        <Button Content="Недвижимость"
+                Click="RealEstatesBtn_Click"
+                Width="200"
+                HorizontalAlignment="Center"
+                Grid.Row="2"
+                Margin="0,0,0,10" />
+
+        <Button Content="Риэлторы"
+                Click="OpenAgents_Click"
+                Width="200"
+                HorizontalAlignment="Center"
+                Grid.Row="3"
+                Margin="0,0,0,10" />
+
+        <Button Content="Сделки"
+                Click="OpenDeals_Click"
+                Width="200"
+                HorizontalAlignment="Center"
+                Grid.Row="4"
+                Margin="0,0,0,10" />
+
+        <!-- Нижняя панель: логотип + кнопка назад -->
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Логотип -->
+            <Image Source="avares://agency/Resources/logo.png"
+                   Height="45"
+                   HorizontalAlignment="Left"
+                   Margin="0,10,0,0" />
+
+            <!-- Назад -->
+            <Button Content="Назад"
+                    Click="BackBtn_Click"
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    Margin="0,10,0,0"
+                    Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</Window>

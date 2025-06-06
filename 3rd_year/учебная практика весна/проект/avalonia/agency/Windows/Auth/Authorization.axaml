@@ -1,0 +1,76 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="agency.Windows.Authorization"
+        Title="Вход в систему"
+        Width="700" Height="450"
+        MinHeight="350" MinWidth="700"
+        MaxHeight="450" MaxWidth="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#f0f6fc">
+
+    <Grid Margin="40">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Вход в систему"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,30" />
+
+        <!-- Лейблы -->
+        <TextBlock Text="Введите код пользователя:"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   Grid.Row="1" Grid.Column="0"
+                   Margin="0,0,20,10" />
+
+        <TextBlock Text="Введите пароль:"
+                   FontSize="16"
+                   VerticalAlignment="Center"
+                   Grid.Row="2" Grid.Column="0"
+                   Margin="0,0,20,10" />
+
+        <!-- Поля ввода -->
+        <TextBox x:Name="Codetxtbox"
+                 Grid.Row="1" Grid.Column="1"
+                 MaxLength="10"
+                 Height="30"
+                 Margin="0,0,0,10" />
+
+        <TextBox x:Name="Passwordtxtbox"
+                 Grid.Row="2" Grid.Column="1"
+                 MaxLength="25"
+                 PasswordChar="*"
+                 Height="30"
+                 Margin="0,0,0,10" />
+
+        <!-- Логотип -->
+        <Image Source="avares://agency/Resources/logo.png"
+               Height="45"
+               Grid.Row="3" Grid.Column="0"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Margin="10" />
+
+        <!-- Кнопка Войти -->
+        <Button Content="Войти"
+                x:Name="LoginBtn"
+                Grid.Row="3" Grid.Column="1"
+                HorizontalAlignment="Right"
+                Width="100"
+                Height="35"
+                Margin="0,0,0,10"
+                Click="LoginBtn_Click" />
+    </Grid>
+</Window>

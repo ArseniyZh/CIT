@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="agency.Windows.RealEstatesWindow"
+        Title="Объекты недвижимости"
+        Width="800" Height="500"
+        MinWidth="800" MinHeight="450"
+        MaxWidth="900" MaxHeight="550"
+        WindowStartupLocation="CenterScreen"
+        Background="#f0f6fc">
+
+  <Grid Margin="20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/> <!-- Назад -->
+      <RowDefinition Height="Auto"/> <!-- Заголовок -->
+      <RowDefinition Height="Auto"/> <!-- Дома -->
+      <RowDefinition Height="Auto"/> <!-- Квартиры -->
+      <RowDefinition Height="Auto"/> <!-- Земли -->
+      <RowDefinition Height="Auto"/> <!-- Адреса -->
+      <RowDefinition Height="Auto"/> <!-- Районы -->
+      <RowDefinition Height="Auto"/> <!-- Логотип -->
+    </Grid.RowDefinitions>
+
+    <!-- Назад -->
+    <Button Content="← Назад"
+            Click="BackBtn_Click"
+            Width="100"
+            HorizontalAlignment="Left"
+            Grid.Row="0"
+            Margin="0,0,0,10"/>
+
+    <!-- Заголовок -->
+    <TextBlock Text="Выберите необходимый пункт меню"
+               FontSize="24"
+               FontWeight="Bold"
+               Grid.Row="1"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,20"/>
+
+    <!-- Кнопки -->
+    <Button Content="Дома"
+            Click="HousesBtn_Click"
+            Width="200"
+            HorizontalAlignment="Center"
+            Grid.Row="2"
+            Margin="0,5"/>
+
+    <Button Content="Квартиры"
+            Click="AppartamnetsBtn_Click"
+            Width="200"
+            HorizontalAlignment="Center"
+            Grid.Row="3"
+            Margin="0,5"/>
+
+    <Button Content="Земли"
+            Click="LandsBtn_Click"
+            Width="200"
+            HorizontalAlignment="Center"
+            Grid.Row="4"
+            Margin="0,5"/>
+
+    <Button Content="Адреса объектов"
+            Click="AddressesBtn_Click"
+            Width="200"
+            HorizontalAlignment="Center"
+            Grid.Row="5"
+            Margin="0,5"/>
+
+    <Button Content="Районы"
+            Click="DistrictBtn_Click"
+            Width="200"
+            HorizontalAlignment="Center"
+            Grid.Row="6"
+            Margin="0,5"/>
+
+    <!-- Логотип -->
+    <Image Source="avares://agency/Resources/logo.png"
+           Height="45"
+           Grid.Row="7"
+           HorizontalAlignment="Left"
+           Margin="0,10,0,0"/>
+  </Grid>
+</Window>
