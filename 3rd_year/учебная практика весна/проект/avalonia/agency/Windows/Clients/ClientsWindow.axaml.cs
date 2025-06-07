@@ -2,8 +2,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using System.Collections.Generic;
 using agency.Models;
+using System.Collections.Generic;
+using agency.Data;
 
 namespace agency.Windows;
 
@@ -21,15 +22,11 @@ public partial class ClientsWindow : Window
 
     private void LoadClients()
     {
-        _clients = new List<ClientDto>
-        {
-            new ClientDto { Id = 1, FullName = "Иванов Иван", Phone = "+7 999 111 2233" },
-            new ClientDto { Id = 2, FullName = "Петрова Анна", Phone = "+7 999 222 3344" },
-            new ClientDto { Id = 3, FullName = "Сидоров Олег", Phone = "+7 999 333 4455" }
-        };
-
+        var repo = new ClientRepository();
+        _clients = repo.GetAllClients();
         RenderClients();
     }
+
 
     private void RenderClients()
     {
@@ -38,6 +35,8 @@ public partial class ClientsWindow : Window
 
         foreach (var client in _clients)
         {
+            var fullName = $"{client.LastName} {client.FirstName} {client.MiddleName}";
+
             var border = new Border
             {
                 BorderThickness = new Thickness(1),
@@ -45,7 +44,7 @@ public partial class ClientsWindow : Window
                 Margin = new Thickness(0, 0, 0, 5),
                 Child = new TextBlock
                 {
-                    Text = $"ID: {client.Id}, ФИО: {client.FullName}, Телефон: {client.Phone}",
+                    Text = $"ID: {client.Id}, ФИО: {fullName}, Телефон: {client.Phone}, Почта: {client.Email}",
                     FontSize = 16,
                     Padding = new Thickness(5)
                 }
@@ -100,11 +99,7 @@ public partial class ClientsWindow : Window
     {
         if (_selectedClient is null) return;
 
-        var editWindow = new EditClientWindow(_selectedClient, () =>
-        {
-            // удалить при отмене (если нужно)
-            _clients.Remove(_selectedClient);
-        });
+        var editWindow = new EditClientWindow(_selectedClient);
 
         await editWindow.ShowDialog(this);
         RenderClients();
@@ -113,6 +108,8 @@ public partial class ClientsWindow : Window
     private void DeleteBtn_Click(object? sender, RoutedEventArgs e)
     {
         if (_selectedClient is null) return;
+
+        new ClientRepository().DeleteClient(_selectedClient.Id);
 
         _clients.Remove(_selectedClient);
         ClientsListPanel.Children.Remove(_clientVisualMap[_selectedClient]);

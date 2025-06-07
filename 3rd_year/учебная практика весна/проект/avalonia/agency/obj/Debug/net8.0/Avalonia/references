@@ -21,6 +21,7 @@
 /Users/arsenijzelvakov/.nuget/packages/avalonia.themes.simple/11.0.0/lib/net6.0/Avalonia.Themes.Simple.dll
 /Users/arsenijzelvakov/.nuget/packages/avalonia.win32/11.0.0/lib/net6.0/Avalonia.Win32.dll
 /Users/arsenijzelvakov/.nuget/packages/avalonia.x11/11.0.0/lib/net6.0/Avalonia.X11.dll
+/Users/arsenijzelvakov/.nuget/packages/dapper/2.1.66/lib/net8.0/Dapper.dll
 /Users/arsenijzelvakov/.nuget/packages/harfbuzzsharp/2.8.2.3/lib/net6.0/HarfBuzzSharp.dll
 /Users/arsenijzelvakov/.nuget/packages/microcom.runtime/0.11.0/lib/net5.0/MicroCom.Runtime.dll
 /Users/arsenijzelvakov/.nuget/packages/microsoft.codeanalysis.csharp/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll
@@ -28,6 +29,7 @@
 /Users/arsenijzelvakov/.nuget/packages/microsoft.codeanalysis.common/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.dll
 /Users/arsenijzelvakov/.nuget/packages/microsoft.codeanalysis.scripting.common/3.8.0/lib/netcoreapp3.1/Microsoft.CodeAnalysis.Scripting.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/Microsoft.CSharp.dll
+/Users/arsenijzelvakov/.nuget/packages/microsoft.data.sqlite.core/9.0.5/lib/net8.0/Microsoft.Data.Sqlite.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/Microsoft.VisualBasic.Core.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/Microsoft.VisualBasic.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/Microsoft.Win32.Primitives.dll
@@ -36,6 +38,9 @@
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/mscorlib.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/netstandard.dll
 /Users/arsenijzelvakov/.nuget/packages/skiasharp/2.88.3/lib/net6.0/SkiaSharp.dll
+/Users/arsenijzelvakov/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.10/lib/netstandard2.0/SQLitePCLRaw.batteries_v2.dll
+/Users/arsenijzelvakov/.nuget/packages/sqlitepclraw.core/2.1.10/lib/netstandard2.0/SQLitePCLRaw.core.dll
+/Users/arsenijzelvakov/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.10/lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/System.AppContext.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/System.Buffers.dll
 /usr/local/share/dotnet/packs/Microsoft.NETCore.App.Ref/8.0.16/ref/net8.0/System.Collections.Concurrent.dll

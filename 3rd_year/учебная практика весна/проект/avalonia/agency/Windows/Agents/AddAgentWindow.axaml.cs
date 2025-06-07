@@ -6,14 +6,14 @@ using agency.Data;
 
 namespace agency.Windows;
 
-public partial class AddClientWindow : Window
+public partial class AddAgentWindow : Window
 {
-    private readonly Action<ClientDto> _onClientAdded;
+    private readonly Action<AgentDto> _onAgentAdded;
 
-    public AddClientWindow(Action<ClientDto> onClientAdded)
+    public AddAgentWindow(Action<AgentDto> onAgentAdded)
     {
         InitializeComponent();
-        _onClientAdded = onClientAdded;
+        _onAgentAdded = onAgentAdded;
     }
 
     private void SaveBtn_Click(object? sender, RoutedEventArgs e)
@@ -22,28 +22,26 @@ public partial class AddClientWindow : Window
         var firstName = FirstNameBox.Text?.Trim() ?? "";
         var middleName = MiddleNameBox.Text?.Trim() ?? "";
         var password = PasswordBox.Text?.Trim() ?? "";
-        var phone = PhoneBox.Text?.Trim() ?? "";
-        var email = EmailBox.Text?.Trim() ?? "";
+        var commissionText = CommissionRateBox.Text?.Trim();
 
         if (string.IsNullOrWhiteSpace(lastName) ||
             string.IsNullOrWhiteSpace(firstName) ||
-            string.IsNullOrWhiteSpace(phone))
+            !double.TryParse(commissionText, out var commissionRate))
         {
-            return; // можно также показать уведомление
+            return; // Можно добавить окно-уведомление об ошибке
         }
 
-        var newClient = new ClientDto
+        var newAgent = new AgentDto
         {
             LastName = lastName,
             FirstName = firstName,
             MiddleName = middleName,
             Password = password,
-            Phone = phone,
-            Email = email
+            CommissionRate = commissionRate
         };
 
-        new ClientRepository().AddClient(newClient);
-        _onClientAdded.Invoke(newClient);
+        new AgentRepository().AddAgent(newAgent);
+        _onAgentAdded.Invoke(newAgent);
         Close();
     }
 }

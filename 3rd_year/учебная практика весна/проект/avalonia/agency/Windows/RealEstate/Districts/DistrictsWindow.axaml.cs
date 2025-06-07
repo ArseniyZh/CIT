@@ -1,8 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using Avalonia;
+using agency.Models;
+using agency.Data;
 using System.Collections.Generic;
+using Avalonia;
 
 namespace agency.Windows;
 
@@ -18,12 +20,7 @@ public partial class DistrictsWindow : Window
 
     private void LoadDistricts()
     {
-        _districts = new List<DistrictDto>
-        {
-            new DistrictDto { Id = 1, Name = "Советский", Area = "55.75, 49.14" },
-            new DistrictDto { Id = 2, Name = "Вахитовский", Area = "55.78, 49.12" }
-        };
-
+        _districts = new DistrictRepository().GetAllDistricts();
         RenderDistricts();
     }
 
@@ -55,12 +52,5 @@ public partial class DistrictsWindow : Window
         var back = new RealEstatesWindow();
         back.Show();
         Close();
-    }
-
-    private class DistrictDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Area { get; set; } = string.Empty;
     }
 }

@@ -1,14 +1,16 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using agency.Data;
+using agency.Models;
 using System.Collections.Generic;
-using Avalonia;
 
 namespace agency.Windows;
 
 public partial class AddressesWindow : Window
 {
-    private List<RealEstateAddressDto> _addresses = new();
+    private List<AddressDto> _addresses = new();
 
     public AddressesWindow()
     {
@@ -18,13 +20,7 @@ public partial class AddressesWindow : Window
 
     private void LoadAddresses()
     {
-        _addresses = new List<RealEstateAddressDto>
-        {
-            new RealEstateAddressDto { Id = 1, City = "Казань", Street = "Ленина", House = "10", Number = "А" },
-            new RealEstateAddressDto { Id = 2, City = "Москва", Street = "Арбат", House = "5", Number = "" },
-            new RealEstateAddressDto { Id = 3, City = "Петербург", Street = "Невский", House = "25", Number = "1Б" }
-        };
-
+        _addresses = new AddressRepository().GetAllAddresses();
         RenderAddresses();
     }
 
@@ -41,7 +37,7 @@ public partial class AddressesWindow : Window
                 Margin = new Thickness(0, 0, 0, 5),
                 Child = new TextBlock
                 {
-                    Text = $"ID: {addr.Id}, Город: {addr.City}, Улица: {addr.Street}, Дом: {addr.House}, Корпус: {addr.Number}",
+                    Text = $"ID: {addr.Id}, Город: {addr.City}, Улица: {addr.Street}, Дом: {addr.House}, Корпус: {addr.Building}",
                     FontSize = 16,
                     Padding = new Thickness(5)
                 }
@@ -56,14 +52,5 @@ public partial class AddressesWindow : Window
         var back = new RealEstatesWindow();
         back.Show();
         Close();
-    }
-
-    private class RealEstateAddressDto
-    {
-        public int Id { get; set; }
-        public string City { get; set; } = string.Empty;
-        public string Street { get; set; } = string.Empty;
-        public string House { get; set; } = string.Empty;
-        public string Number { get; set; } = string.Empty;
     }
 }

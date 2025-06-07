@@ -2,14 +2,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         x:Class="agency.Windows.EditAgentWindow"
         Title="Редактировать агента"
-        Width="400" Height="300"
+        Width="400" Height="400"
         WindowStartupLocation="CenterOwner">
 
   <StackPanel Margin="20" Spacing="10">
     <TextBlock Text="Редактирование агента" FontSize="20" FontWeight="Bold"/>
 
-    <TextBox x:Name="NameBox" Watermark="ФИО"/>
-    <TextBox x:Name="PhoneBox" Watermark="Телефон"/>
+    <TextBox x:Name="LastNameBox" Watermark="Фамилия"/>
+    <TextBox x:Name="FirstNameBox" Watermark="Имя"/>
+    <TextBox x:Name="MiddleNameBox" Watermark="Отчество"/>
+    <TextBox x:Name="PasswordBox" Watermark="Пароль"/>
+    <TextBox x:Name="CommissionRateBox" Watermark="Процент (например: 12.5)"/>
 
     <Button Content="Сохранить" Click="SaveBtn_Click" Width="100"/>
   </StackPanel>

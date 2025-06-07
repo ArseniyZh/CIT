@@ -1,9 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using System.Collections.Generic;
 using Avalonia.Media;
+using agency.Data;
 using agency.Models;
+using System.Collections.Generic;
 
 namespace agency.Windows;
 
@@ -12,21 +13,18 @@ public partial class AgentsWindow : Window
     private List<AgentDto> _agents = new();
     private AgentDto? _selectedAgent;
     private Dictionary<AgentDto, Border> _agentVisualMap = new();
+    private readonly AgentRepository _agentRepository = new();
 
     public AgentsWindow()
     {
         InitializeComponent();
-        InitializeAgents(); // отдельный метод для создания начальных данных
-        RenderAgents();     // отрисовка
+        LoadAgentsFromDb();
+        RenderAgents();
     }
 
-    private void InitializeAgents()
+    private void LoadAgentsFromDb()
     {
-        _agents = new List<AgentDto>
-        {
-            new AgentDto { Id = 1, Name = "Иванов Иван", Phone = "+7 999 123-45-67" },
-            new AgentDto { Id = 2, Name = "Петрова Анна", Phone = "+7 999 987-65-43" }
-        };
+        _agents = _agentRepository.GetAllAgents();
     }
 
     private void RenderAgents()
@@ -43,7 +41,7 @@ public partial class AgentsWindow : Window
                 Margin = new Thickness(0, 0, 0, 5),
                 Child = new TextBlock
                 {
-                    Text = $"ID: {agent.Id}, Имя: {agent.Name}, Телефон: {agent.Phone}",
+                    Text = $"ID: {agent.Id}, ФИО: {agent.LastName} {agent.FirstName} {agent.MiddleName}, Процент: {agent.CommissionRate}%",
                     FontSize = 16,
                     Padding = new Thickness(5)
                 }
@@ -66,9 +64,7 @@ public partial class AgentsWindow : Window
     private void HighlightSelected(AgentDto agent)
     {
         foreach (var (ag, border) in _agentVisualMap)
-        {
             border.Background = ag == agent ? Brushes.LightBlue : Brushes.Transparent;
-        }
     }
 
     private void EnableActionButtons()
@@ -83,21 +79,15 @@ public partial class AgentsWindow : Window
         DeleteButton.IsEnabled = false;
     }
 
-    private void AddAgentBtn_Click(object? sender, RoutedEventArgs e)
+    private async void AddAgentBtn_Click(object? sender, RoutedEventArgs e)
     {
-        var message = new Window
+        var addWindow = new AddAgentWindow(agent =>
         {
-            Title = "Заглушка",
-            Width = 300,
-            Height = 100,
-            Content = new TextBlock
-            {
-                Text = "Форма добавления не реализована",
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center
-            }
-        };
-        message.ShowDialog(this);
+            _agents.Add(agent);
+            RenderAgents();
+        });
+
+        await addWindow.ShowDialog(this);
     }
 
     private void BackBtn_Click(object? sender, RoutedEventArgs e)
@@ -124,7 +114,7 @@ public partial class AgentsWindow : Window
 
         var editWindow = new EditAgentWindow(_selectedAgent);
         await editWindow.ShowDialog(this);
-
-        RenderAgents(); // теперь просто перерисовываем список
+        LoadAgentsFromDb();
+        RenderAgents();
     }
 }

@@ -1,19 +1,18 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="agency.Windows.AddClientWindow"
-        Title="Добавить клиента"
-        Width="400" Height="450"
+        x:Class="agency.Windows.AddAgentWindow"
+        Title="Добавить агента"
+        Width="400" Height="400"
         WindowStartupLocation="CenterOwner">
 
   <StackPanel Margin="20" Spacing="10">
-    <TextBlock Text="Добавление клиента" FontSize="20" FontWeight="Bold"/>
+    <TextBlock Text="Добавление агента" FontSize="20" FontWeight="Bold"/>
 
     <TextBox x:Name="LastNameBox" Watermark="Фамилия"/>
     <TextBox x:Name="FirstNameBox" Watermark="Имя"/>
     <TextBox x:Name="MiddleNameBox" Watermark="Отчество"/>
     <TextBox x:Name="PasswordBox" Watermark="Пароль"/>
-    <TextBox x:Name="PhoneBox" Watermark="Телефон"/>
-    <TextBox x:Name="EmailBox" Watermark="Почта"/>
+    <TextBox x:Name="CommissionRateBox" Watermark="Процент (например: 10.5)"/>
 
     <Button Content="Сохранить" Click="SaveBtn_Click" Width="100"/>
   </StackPanel>

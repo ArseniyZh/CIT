@@ -1,84 +1,56 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using agency.Models;
+using agency.Data;
 using System.Collections.Generic;
-using System.Linq;
+using Avalonia;
 
-namespace agency.Windows
+namespace agency.Windows;
+
+public partial class DealsWindow : Window
 {
-    public partial class DealsWindow : Window
+    private List<DealDto> _deals = new();
+
+    public DealsWindow()
     {
-        private List<DemandDto> _demands = new();
-        private List<SupplyDto> _supplies = new();
-        private List<DealDisplayItem> _deals = new();
+        InitializeComponent();
+        LoadDeals();
+    }
 
-        public DealsWindow()
-        {
-            InitializeComponent();
-            LoadData();
-        }
+    private void LoadDeals()
+    {
+        _deals = new DealRepository().GetAllDeals();
+        RenderDeals();
+    }
 
-        private void LoadData()
+    private void RenderDeals()
+    {
+        DealsListPanel.Children.Clear();
+
+        foreach (var deal in _deals)
         {
-            _demands = new List<DemandDto>
+            var border = new Border
             {
-                new DemandDto { Id = 1, DisplayInfo = "Казань, Баумана, до 5 млн" },
-                new DemandDto { Id = 2, DisplayInfo = "Уфа, Ленина, до 3 млн" },
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Black,
+                Margin = new Thickness(0, 0, 0, 5),
+                Child = new TextBlock
+                {
+                    Text = $"ID: {deal.Id}, Название: {deal.Title}",
+                    FontSize = 16,
+                    Padding = new Thickness(5)
+                }
             };
 
-            _supplies = new List<SupplyDto>
-            {
-                new SupplyDto { Id = 1, DisplayInfo = "Казань, 4.5 млн" },
-                new SupplyDto { Id = 2, DisplayInfo = "Уфа, 2.9 млн" },
-            };
-
-            DemandComboBox.ItemsSource = _demands;
-            SupplyComboBox.ItemsSource = _supplies;
-        }
-
-        private void CreateDeal_Click(object? sender, RoutedEventArgs e)
-        {
-            if (DemandComboBox.SelectedItem is not DemandDto demand || SupplyComboBox.SelectedItem is not SupplyDto supply)
-                return;
-
-            _deals.Add(new DealDisplayItem
-            {
-                DemandDisplay = demand.DisplayInfo,
-                SupplyDisplay = supply.DisplayInfo
-            });
-
-            _demands.Remove(demand);
-            _supplies.Remove(supply);
-
-            DemandComboBox.ItemsSource = _demands;
-            SupplyComboBox.ItemsSource = _supplies;
-
-            DealsListBox.ItemsSource = _deals.Select(d => $"Потребность: {d.DemandDisplay} | Предложение: {d.SupplyDisplay}");
-        }
-
-        private void BackBtn_Click(object? sender, RoutedEventArgs e)
-        {
-            var main = new AgencyWindow();
-            main.Show();
-            Close();
+            DealsListPanel.Children.Add(border);
         }
     }
 
-    public class DemandDto
+    private void BackBtn_Click(object? sender, RoutedEventArgs e)
     {
-        public int Id { get; set; }
-        public string DisplayInfo { get; set; } = string.Empty;
-    }
-
-    public class SupplyDto
-    {
-        public int Id { get; set; }
-        public string DisplayInfo { get; set; } = string.Empty;
-    }
-
-    public class DealDisplayItem
-    {
-        public string DemandDisplay { get; set; } = string.Empty;
-        public string SupplyDisplay { get; set; } = string.Empty;
+        var back = new AgencyWindow();
+        back.Show();
+        Close();
     }
 }

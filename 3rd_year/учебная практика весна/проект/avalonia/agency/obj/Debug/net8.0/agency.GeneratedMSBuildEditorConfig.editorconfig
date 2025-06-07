@@ -23,6 +23,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/AgencyWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/Agents/AddAgentWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/Agents/AgentsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
