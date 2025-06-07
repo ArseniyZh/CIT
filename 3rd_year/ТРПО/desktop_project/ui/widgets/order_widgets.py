@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
+    QHeaderView,
 )
 
 from database.queries.order_queries import (
@@ -107,6 +108,8 @@ class OrdersListWidget(QWidget):
         self.table.setHorizontalHeaderLabels(
             ["ID заказа", "ID пользователя", "Дата заезда", "Дата выезда"]
         )
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.verticalHeader().hide()
         self.table.cellDoubleClicked.connect(self.on_order_clicked)
 
         layout.addWidget(self.table)

@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
+    QHeaderView,
 )
 
 from database.queries.about_queries import (
@@ -87,6 +88,8 @@ class AboutsListWidget(QWidget):
         self.table = QTableWidget()
         self.table.setColumnCount(4)
         self.table.setHorizontalHeaderLabels(["ID отчета", "ID заказа", "Цена", "Дата оплаты"])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.verticalHeader().hide()
         self.table.resizeColumnsToContents()
         self.table.cellDoubleClicked.connect(self.on_about_clicked)
 

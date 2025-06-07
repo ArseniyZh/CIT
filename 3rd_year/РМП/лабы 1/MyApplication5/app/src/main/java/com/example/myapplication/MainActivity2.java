@@ -1,24 +1,45 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main2);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        findViewById(R.id.button).setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+        });
+
+        findViewById(R.id.main).setOnTouchListener(new OnSwipe(this) {
+            @Override
+            public void onSwipeRight() {
+                Intent switcherRight = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(switcherRight);
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                Intent switcherLeft = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(switcherLeft);
+            }
+
+            @Override
+            public void onSwipeTop() {
+                Intent switcherTop = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(switcherTop);
+            }
+
+            @Override
+            public void onSwipeBottom() {
+                Intent switcherBottom = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(switcherBottom);
+            }
         });
     }
 }

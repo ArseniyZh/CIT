@@ -1,0 +1,26 @@
+namespace Agency.Models
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    public partial class Houses
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
+        public double? Coordinate_latitude { get; set; }
+
+        public double? Coordinate_longitude { get; set; }
+
+        public int? TotalFloors { get; set; }
+
+        public double? TotalArea { get; set; }
+
+        public int RealEstate_Id { get; set; }
+
+        public virtual RealEstate RealEstate { get; set; }
+    }
+}

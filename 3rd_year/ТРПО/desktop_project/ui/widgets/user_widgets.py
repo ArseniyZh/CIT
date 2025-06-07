@@ -10,6 +10,7 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QVBoxLayout,
     QWidget,
+    QHeaderView,
 )
 
 from database.queries.user_queries import (
@@ -212,6 +213,8 @@ class UsersListWidget(QWidget):
         self.table = QTableWidget()
         self.table.setColumnCount(3)
         self.table.setHorizontalHeaderLabels(["ID", "Номер машины", "Марка машины"])
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.table.verticalHeader().hide()
         self.table.cellDoubleClicked.connect(self.on_user_clicked)
 
         # Добавляем всё в основной лейаут

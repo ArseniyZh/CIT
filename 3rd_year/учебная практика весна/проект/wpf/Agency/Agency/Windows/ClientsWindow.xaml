@@ -1,0 +1,51 @@
+﻿<Window x:Class="Agency.Windows.ClientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agency.Windows"
+        mc:Ignorable="d"
+        Title="Клиенты" MinHeight="550" MinWidth="800" MaxHeight="650" MaxWidth="900" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="BackBtn" Click="BackBtn_Click" Style="{StaticResource BackBtn}"></Button>
+        <Label Style="{StaticResource Title}" Content="Клиенты"></Label>
+        <Image Height="45" Margin="10"  Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Source="/Resources/logo (1).png"></Image>
+        <Label Style="{StaticResource Subtitle}" Content="Поиск ->" HorizontalAlignment="Right" Margin="0,10,170,0"></Label>
+        <TextBox TextChanged="SearchTxtbox_TextChanged" x:Name="SearchTxtbox" Style="{StaticResource TextboxInput}" HorizontalAlignment="Right" Margin="10"></TextBox>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AddNewClientBtn" Click="AddNewClientBtn_Click" Style="{StaticResource ActionBtn}" Content="Добавить"></Button>
+            <Button x:Name="EditBtn" Click="EditBtn_Click" Style="{StaticResource ActionBtn}" Content="Изменить"></Button>
+            <Button x:Name="DeleteBtn" Click="DeleteBtn_Click" Style="{StaticResource ActionBtn}" Content="Удалить" Cursor="Hand"></Button>
+        </StackPanel>
+        <ListView SelectionChanged="ClientsListView_SelectionChanged" Grid.Row="1" x:Name="ClientsListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel>
+                        
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1">
+                    <Grid Height="85" Width="750">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Persons.LastName, StringFormat='Отчество: {0}'}"/>
+                                <TextBlock Text="{Binding Persons.FirstName, StringFormat='Фамилия: {0}'}"/>
+                                <TextBlock Text="{Binding Persons.MiddleName, StringFormat='Имя: {0}'}"/>
+                            </StackPanel>
+                    </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
