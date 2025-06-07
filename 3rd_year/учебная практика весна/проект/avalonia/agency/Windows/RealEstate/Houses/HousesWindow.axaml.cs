@@ -1,11 +1,15 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using System.Collections.Generic;
+using Avalonia;
 
 namespace agency.Windows;
 
 public partial class HousesWindow : Window
 {
+    private List<HouseDto> _houses = new();
+
     public HousesWindow()
     {
         InitializeComponent();
@@ -14,13 +18,36 @@ public partial class HousesWindow : Window
 
     private void LoadHouses()
     {
-        var list = new List<HouseDto>
+        _houses = new List<HouseDto>
         {
             new HouseDto { Id = 1, Address = "ул. Центральная, д. 1", Floors = 2, Area = 120.5 },
             new HouseDto { Id = 2, Address = "ул. Новая, д. 12", Floors = 1, Area = 95.0 }
         };
 
-        HousesDataGrid.ItemsSource = list;
+        RenderHouses();
+    }
+
+    private void RenderHouses()
+    {
+        HousesListPanel.Children.Clear();
+
+        foreach (var house in _houses)
+        {
+            var border = new Border
+            {
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Black,
+                Margin = new Thickness(0, 0, 0, 5),
+                Child = new TextBlock
+                {
+                    Text = $"ID: {house.Id}, Адрес: {house.Address}, Этажей: {house.Floors}, Площадь: {house.Area} м²",
+                    FontSize = 16,
+                    Padding = new Thickness(5)
+                }
+            };
+
+            HousesListPanel.Children.Add(border);
+        }
     }
 
     private void BackBtn_Click(object? sender, RoutedEventArgs e)

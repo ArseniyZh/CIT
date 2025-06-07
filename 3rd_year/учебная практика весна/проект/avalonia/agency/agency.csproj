@@ -19,13 +19,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <PropertyGroup>
-    <UseWPF>false</UseWPF>
-    <UseWindowsForms>false</UseWindowsForms>
-    <AvaloniaUseBuildTasks>true</AvaloniaUseBuildTasks>
-  </PropertyGroup>
-
-
   <ItemGroup>
     <!-- Здесь мы включаем все XAML-файлы, включая App.axaml -->
     <AvaloniaResource Include="Resources/logo.png" />

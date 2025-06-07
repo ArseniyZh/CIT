@@ -37,12 +37,6 @@
                  HorizontalAlignment="Center"
                  Grid.Column="1"
                  Margin="0,0,0,10"/>
-
-      <!-- Поиск -->
-      <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Top">
-        <TextBlock Text="Поиск ->" VerticalAlignment="Center" Margin="0,0,5,0"/>
-        <TextBox Width="150"/>
-      </StackPanel>
     </Grid>
 
     <!-- Список агентов -->

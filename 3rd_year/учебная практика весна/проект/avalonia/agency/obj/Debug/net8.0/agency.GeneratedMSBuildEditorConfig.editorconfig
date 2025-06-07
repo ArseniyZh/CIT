@@ -44,13 +44,19 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/Deals/DealsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/AppartamentsWindow.axaml]
+[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/Addresses/AddressesWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/HousesWindow.axaml]
+[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/Apartments/ApartamentsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/LandsWindow.axaml]
+[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/Districts/DistrictsWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/Houses/HousesWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/Lands/LandsWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/Users/arsenijzelvakov/Desktop/programming/study/CIT/CIT/3rd_year/учебная практика весна/проект/avalonia/agency/Windows/RealEstate/RealEstatesWindow.axaml]

@@ -33,9 +33,9 @@ public partial class AgencyWindow : Window
 
     private void OpenDeals_Click(object? sender, RoutedEventArgs e)
     {
-        // var dealsWindow = new DealsWindow();
-        // dealsWindow.Show();
-        // this.Close(); // если хочешь закрыть текущее окно
+        var dealsWindow = new DealsWindow();
+        dealsWindow.Show();
+        this.Close(); // если хочешь закрыть текущее окно
     }
 
     private void BackBtn_Click(object? sender, RoutedEventArgs e)

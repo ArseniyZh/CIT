@@ -1,10 +1,13 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="agency.Windows.ClientsWindow"
-        Title="Клиенты"
-        Width="800" Height="600"
-        MinWidth="800" MinHeight="550"
-        MaxWidth="900" MaxHeight="650"
+        x:Class="agency.Windows.HousesWindow"
+        Title="Дома"
+        Width="800"
+        Height="600"
+        MinWidth="800"
+        MinHeight="550"
+        MaxWidth="900"
+        MaxHeight="650"
         WindowStartupLocation="CenterScreen"
         Background="#f0f6fc">
 
@@ -24,13 +27,14 @@
       </Grid.ColumnDefinitions>
 
       <Button Content="← Назад" Click="BackBtn_Click" Grid.Column="0" Width="100" Margin="0,0,10,0"/>
-      <TextBlock Text="Клиенты" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="1" Margin="0,0,0,10"/>
+      <TextBlock Text="Дома" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Grid.Column="1" Margin="0,0,0,10"/>
     </Grid>
 
-    <!-- Список клиентов -->
+    <!-- Список домов -->
     <ScrollViewer Grid.Row="1">
-      <StackPanel x:Name="ClientsListPanel" Spacing="8" />
+      <StackPanel x:Name="HousesListPanel" Spacing="8"/>
     </ScrollViewer>
+
 
     <!-- Нижняя панель -->
     <Grid Grid.Row="2">
@@ -43,16 +47,6 @@
              Height="45"
              HorizontalAlignment="Left"
              Margin="0,10,0,0" />
-
-      <StackPanel Orientation="Horizontal"
-                  Grid.Column="1"
-                  HorizontalAlignment="Center"
-                  Spacing="10"
-                  Margin="0,10,0,0">
-        <Button Content="Добавить" Width="100" Click="AddClientBtn_Click"/>
-        <Button x:Name="EditButton" Content="Изменить" Width="100" IsEnabled="False" Click="EditBtn_Click"/>
-        <Button x:Name="DeleteButton" Content="Удалить" Width="100" IsEnabled="False" Click="DeleteBtn_Click"/>
-      </StackPanel>
     </Grid>
   </Grid>
 </Window>
